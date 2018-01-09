@@ -10,11 +10,18 @@
 
 using namespace licensepp;
 
-
-const char* Utils::kDays[7] = { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" };
-const char* Utils::kDaysAbbrev[7] = { "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" };
-const char* Utils::kMonths[12] = { "January", "February", "March", "Apri", "May", "June", "July", "August", "September", "October", "November", "December" };
-const char* Utils::kMonthsAbbrev[12] = { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
+const char* Utils::kDays[7] = { "Sunday", "Monday", "Tuesday",
+                                "Wednesday", "Thursday", "Friday",
+                                "Saturday" };
+const char* Utils::kDaysAbbrev[7] = { "Sun", "Mon", "Tue",
+                                      "Wed", "Thu", "Fri", "Sat" };
+const char* Utils::kMonths[12] = { "January", "February", "March",
+                                   "Apri", "May", "June", "July",
+                                   "August", "September", "October",
+                                   "November", "December" };
+const char* Utils::kMonthsAbbrev[12] = { "Jan", "Feb", "Mar", "Apr",
+                                         "May", "Jun", "Jul", "Aug",
+                                         "Sep", "Oct", "Nov", "Dec" };
 
 unsigned long long Utils::nowUtc()
 {
@@ -38,7 +45,7 @@ struct ::tm* Utils::buildTimeInfo(struct timeval* currTime, struct ::tm* timeInf
 {
 #if LICENSEPP_OS_UNIX
   time_t rawTime = currTime->tv_sec;
-  ::localtime_r(&rawTime, timeInfo);
+  ::gmtime_r(&rawTime, timeInfo);
   return timeInfo;
 #else
 #  ifdef (_MSC_VER)
@@ -49,12 +56,12 @@ struct ::tm* Utils::buildTimeInfo(struct timeval* currTime, struct ::tm* timeInf
 #    else
   _time64(&t);
 #    endif
-  localtime_s(timeInfo, &t);
+  gmtime_s(timeInfo, &t);
   return timeInfo;
 #  else
   // For any other compilers that don't have CRT warnings issue e.g, MinGW or TDM GCC- we use different method
   time_t rawTime = currTime->tv_sec;
-  struct tm* tmInf = localtime(&rawTime);
+  struct tm* tmInf = gmtime(&rawTime);
   *timeInfo = *tmInf;
   return timeInfo;
 #  endif  // _MSC_VER
@@ -73,10 +80,8 @@ char* Utils::convertAndAddToBuff(std::size_t n, int len, char* buf, const char* 
         *--p = '0';
         --len;
     }
-    if (zeroPadded) {
-        while (p > localBuff && len-- > 0) {
-            *--p = static_cast<char>('0');
-        }
+    while (zeroPadded && p > localBuff && len-- > 0) {
+        *--p = static_cast<char>('0');
     }
     return addToBuff(p, buf, bufLim);
 }
@@ -105,19 +110,19 @@ char* Utils::parseFormat(char* buf, std::size_t bufSz, const char* format, const
                 buf = convertAndAddToBuff(tInfo->tm_mday, 2, buf, bufLim);
                 continue;
             case 'a':  // Day of week (short)
-                buf = addToBuff(Utils::kDaysAbbrev[tInfo->tm_wday], buf, bufLim);
+                buf = addToBuff(kDaysAbbrev[tInfo->tm_wday], buf, bufLim);
                 continue;
             case 'A':  // Day of week (long)
-                buf = addToBuff(Utils::kDays[tInfo->tm_wday], buf, bufLim);
+                buf = addToBuff(kDays[tInfo->tm_wday], buf, bufLim);
                 continue;
             case 'M':  // month
                 buf = convertAndAddToBuff(tInfo->tm_mon + 1, 2, buf, bufLim);
                 continue;
             case 'b':  // month (short)
-                buf = addToBuff(Utils::kMonthsAbbrev[tInfo->tm_mon], buf, bufLim);
+                buf = addToBuff(kMonthsAbbrev[tInfo->tm_mon], buf, bufLim);
                 continue;
             case 'B':  // month (long)
-                buf = addToBuff(Utils::kMonths[tInfo->tm_mon], buf, bufLim);
+                buf = addToBuff(kMonths[tInfo->tm_mon], buf, bufLim);
                 continue;
             case 'y':  // year (two digits)
                 buf = convertAndAddToBuff(tInfo->tm_year + 1900, 2, buf, bufLim);

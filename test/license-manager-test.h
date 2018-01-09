@@ -83,6 +83,7 @@ TEST(LicenseManagerTest, VerificationUsingSecureAuthorityAndSignature)
     ASSERT_TRUE(licenseManager.validate(&license, true, "unittest-signature"));
     ASSERT_FALSE(licenseManager.validate(&license, true, "wrong-signature"));
     ASSERT_FALSE(licenseManager.validate(&license, false));
+    ASSERT_EQ(license.formattedExpiry(), "");
 }
 
 #endif // LICENSE_MANAGER_TEST_H

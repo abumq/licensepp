@@ -6,7 +6,6 @@
 //
 
 #include <cmath>
-#include <ctime>
 #include <iostream>
 #include <license++/issuing-authority.h>
 #include <license++/license.h>
@@ -19,7 +18,11 @@
 
 using namespace licensepp;
 
-IssuingAuthority::IssuingAuthority(const std::string& id, const std::string& name, const std::string& keypair, unsigned int maxValidity, bool active) :
+IssuingAuthority::IssuingAuthority(const std::string& id,
+                                   const std::string& name,
+                                   const std::string& keypair,
+                                   unsigned int maxValidity,
+                                   bool active) :
     m_id(id),
     m_name(name),
     m_keypair(keypair),
@@ -62,8 +65,8 @@ License IssuingAuthority::issue(const std::string& licensee,
     if (licensee.empty()) {
         throw LicenseException("Please provide valid licensee name and signature");
     }
-    if (licensee.size() == 1 || licensee.size() > 32) {
-        throw LicenseException("Licensee name too long. Please choose characters between 2-32");
+    if (licensee.size() == 1 || licensee.size() > 255) {
+        throw LicenseException("Licensee name too long. Please choose characters between 2-255");
     }
     if (validityPeriod < 24U) {
         throw LicenseException("License cannot be valid for less than 24 hours");
@@ -101,17 +104,17 @@ License IssuingAuthority::issue(const std::string& licensee,
         throw LicenseException("Issuing authority could not be loaded. Invalid keypair");
     }
 
-    RSA::PrivateKey key = RSA::loadPrivateKey(Base64::decode(m_keypair.substr(0, separatorPos)), secret);
+    const RSA::PrivateKey key = RSA::loadPrivateKey(Base64::decode(m_keypair.substr(0, separatorPos)), secret);
 
     try {
         license.setAuthoritySignature(RSA::sign(license.raw(), key, secret));
     } catch (const std::exception& e) {
         std::cerr << "Failed to sign the license" + std::string(e.what()) << std::endl;
-        throw e;
+        throw LicenseException(e.what());
     }
 
     if (!validate(&license, masterKey, true, licenseeSignature)) {
-        throw LicenseException("Failed to validate new license. Please report it @github/muflihun/residue");
+        throw LicenseException("Failed to validate new license. Please report it @https://github.com/muflihun/licensepp");
     }
     return license;
 }

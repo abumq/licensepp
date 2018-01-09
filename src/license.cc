@@ -82,7 +82,7 @@ std::string License::raw() const
 bool License::load(const std::string& licenseBase64)
 {
     try {
-        std::string jsonLicense = Base64::decode(licenseBase64);
+        const std::string jsonLicense = Base64::decode(licenseBase64);
 
         JsonObject::Json j = JsonObject::Json::parse(jsonLicense);
         setLicensee(j["licensee"].get<std::string>());

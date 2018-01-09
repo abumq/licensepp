@@ -11,7 +11,7 @@
 #include <string>
 #include <license++/license.h>
 
-namespace license {
+namespace licensepp {
 
 ///
 /// \brief License issuing authority

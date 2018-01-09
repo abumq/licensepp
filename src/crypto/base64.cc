@@ -8,7 +8,7 @@
 #include "src/external/Ripe.h"
 #include "src/crypto/base64.h"
 
-using namespace license;
+using namespace licensepp;
 
 std::string Base64::decode(const std::string& encoded)
 {

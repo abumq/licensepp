@@ -8,7 +8,7 @@
 #include "src/external/Ripe.h"
 #include "src/crypto/aes.h"
 
-using namespace license;
+using namespace licensepp;
 
 std::string AES::decrypt(std::string& raw, const std::string& key, std::string& iv)
 {

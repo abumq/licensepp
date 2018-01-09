@@ -9,7 +9,7 @@
 #include "src/crypto/rsa.h"
 #include "src/crypto/base64.h"
 
-using namespace license;
+using namespace licensepp;
 
 std::string RSA::encrypt(const std::string& data, const PublicKey& publicKey)
 {

@@ -10,7 +10,7 @@
 
 #include <string>
 
-namespace license {
+namespace licensepp {
 
 ///
 /// \brief Base16 encoding wrappers

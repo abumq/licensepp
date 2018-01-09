@@ -13,7 +13,7 @@
 #include <license++/issuing-authority.h>
 #include "license-manager-key-register.h"
 
-using namespace license;
+using namespace licensepp;
 
 class LicenseManager : public BaseLicenseManager<LicenseManagerKeyRegister>
 {

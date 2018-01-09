@@ -17,7 +17,7 @@
 #include "src/crypto/rsa.h"
 #include "src/utils.h"
 
-using namespace license;
+using namespace licensepp;
 
 IssuingAuthority::IssuingAuthority(const std::string& id, const std::string& name, const std::string& keypair, unsigned int maxValidity, bool active) :
     m_id(id),

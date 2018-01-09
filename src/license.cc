@@ -11,7 +11,7 @@
 #include "src/crypto/base64.h"
 #include "src/json-object.h"
 
-using namespace license;
+using namespace licensepp;
 
 License::License() :
     m_issueDate(0),

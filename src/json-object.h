@@ -11,7 +11,7 @@
 #include <iostream>
 #include "src/external/json.h"
 
-namespace license {
+namespace licensepp {
 
 ///
 /// \brief Json wrapper to serialize / deserialize json string

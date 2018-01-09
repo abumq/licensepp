@@ -72,7 +72,7 @@ int main(int argc, char* argv[])
             std::string licenseKey = std::string((std::istreambuf_iterator<char>(stream)),
                                                  (std::istreambuf_iterator<char>()));
             stream.close();
-            license::License license;
+            licensepp::License license;
             license.load(licenseKey);
             if (!licenseManager.validate(&license, true, signature)) {
                 std::cout << "License is not valid";
@@ -82,7 +82,7 @@ int main(int argc, char* argv[])
             }
         }
     } else if (issue) {
-        const license::IssuingAuthority* issuingAuthority = nullptr;
+        const licensepp::IssuingAuthority* issuingAuthority = nullptr;
         for (const auto& a : LicenseManagerKeyRegister::LICENSE_ISSUING_AUTHORITIES) {
             if (a.id() == authority) {
                 issuingAuthority = &(a);
@@ -92,7 +92,7 @@ int main(int argc, char* argv[])
             std::cout << "Invalid issuing authority." << std::endl;
             return 1;
         }
-        license::License license = licenseManager.issue(licensee, period, issuingAuthority, secret, signature);
+        licensepp::License license = licenseManager.issue(licensee, period, issuingAuthority, secret, signature);
         std::cout << license.toString() << std::endl;
         std::cout << "Licensed to " << license.licensee() << std::endl;
         std::cout << "Subscription is active until " << license.formattedExpiry() << std::endl << std::endl;

@@ -15,7 +15,7 @@
 #include <license++/license-exception.h>
 #include <license++/issuing-authority.h>
 
-namespace license {
+namespace licensepp {
 
 ///
 /// \brief Base license manager

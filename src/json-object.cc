@@ -7,7 +7,7 @@
 
 #include "src/json-object.h"
 
-using namespace license;
+using namespace licensepp;
 
 JsonObject::JsonObject()
     : m_isValid(false)

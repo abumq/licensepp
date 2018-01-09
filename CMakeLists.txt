@@ -59,7 +59,6 @@ set(LICENSEPP_SOURCE_FILES
     src/crypto/base64.cc
     src/crypto/base16.cc
     src/crypto/rsa.cc
-    src/crypto/zlib.cc
     src/issuing-authority.cc
     src/license.cc
 )

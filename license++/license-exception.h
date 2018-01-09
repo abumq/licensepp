@@ -10,7 +10,7 @@
 
 #include <exception>
 
-namespace license {
+namespace licensepp {
 
 ///
 /// \brief Exception thrown by all the residue helper and internal methods

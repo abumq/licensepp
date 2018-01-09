@@ -8,7 +8,7 @@
 #include <ctime>
 #include "src/utils.h"
 
-using namespace license;
+using namespace licensepp;
 
 unsigned long long Utils::nowUtc()
 {

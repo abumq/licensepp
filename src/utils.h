@@ -10,7 +10,7 @@
 
 #include <chrono>
 
-namespace license {
+namespace licensepp {
 
 ///
 /// \brief Contains static utility functions used by Residue

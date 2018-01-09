@@ -11,7 +11,7 @@
 #include <license++/base-license-manager.h>
 #include <license++/issuing-authority.h>
 
-using namespace license;
+using namespace licensepp;
 
 class LicenseKeysRegister
 {

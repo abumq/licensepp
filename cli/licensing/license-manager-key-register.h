@@ -17,6 +17,6 @@ class LicenseManagerKeyRegister
 public:
     static const unsigned char LICENSE_MANAGER_SIGNATURE_KEY[];
 
-    static const std::vector<license::IssuingAuthority> LICENSE_ISSUING_AUTHORITIES;
+    static const std::vector<licensepp::IssuingAuthority> LICENSE_ISSUING_AUTHORITIES;
 };
 #endif // LicenseManagerKeyRegister_h

@@ -6,8 +6,8 @@
 
 License++ is software licensing library that provides an abstract way to secure your software usage.
 
-[![Build Status](https://img.shields.io/travis/muflihun/licensepp/master.svg)](https://travis-ci.org/muflihun/licensepp/branches)
-[![Build Status](https://img.shields.io/travis/muflihun/lilcensepp/develop.svg)](https://travis-ci.org/muflihun/licensepp/branches)
+[![Build Status](https://img.shields.io/travis/muflihun/licensepp/master.svg?)](https://travis-ci.org/muflihun/licensepp/branches)
+[![Build Status](https://img.shields.io/travis/muflihun/licensepp/develop.svg?)](https://travis-ci.org/muflihun/licensepp/branches)
 [![Version](https://img.shields.io/github/release/muflihun/licensepp.svg)](https://github.com/muflihun/licensepp/releases/latest)
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.me/MuflihunDotCom/25)
 

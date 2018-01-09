@@ -2,7 +2,7 @@
   ﷽
 </p>
 
-# License++
+![banner]
 
 License++ is software licensing library that provides an abstract way to secure your software usage.
 
@@ -166,3 +166,5 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ```
+
+ [banner]: https://raw.githubusercontent.com/muflihun/licensepp/develop/licensepp.png

@@ -14,22 +14,42 @@ License++ is software licensing library that provides an abstract way to secure 
 ## Features
 
  * RSA-Based signing to prevent alteration
- * Custom issuing authority for your software
- * Anyone can validate the license but not everyone can issue new licenses
- * Expiring issuing authority
+ * Custom license keys for your software
+ * Anyone can check the license validity
+ * Restricted issuance of new licenses
+ * Disable issuing authority at anytime
  
 ## Getting Started
 
+### Dependencies
+
+  * C++11
+  * [Crypto++](https://www.cryptopp.com/) v5.6.5+ [with Pem Pack](https://raw.githubusercontent.com/muflihun/muflihun.github.io/master/downloads/pem_pack.zip)
+  * [cmake](https://cmake.org/) v2.8.12+
+  * [zlib-devel](https://zlib.net/)
+  
 ### Installation
  * [Download](https://github.com/muflihun/licensepp/archive/master.zip) or [clone](git@github.com:muflihun/licensepp.git) the repository
+ * Install Crypto++
+ ```
+wget https://raw.githubusercontent.com/muflihun/muflihun.github.io/master/downloads/cryptocpp.tar.gz
+tar xf cryptocpp.tar.gz
+cd cryptopp-CRYPTOPP_5_6_5
+wget https://raw.githubusercontent.com/muflihun/muflihun.github.io/master/downloads/pem_pack.zip
+unzip pem_pack.zip
+cmake .
+make
+make install
+```
  * Use CMake to build the project
      ```
+     cd <project_root>
      mkdir build
      cd build
      cmake ..
      make install
      ```
- * You can build [cli](/cli) tool or [sample](/sample) code to ensure license++ is installed properly
+ * You can build [cli](/cli) tool to ensure license++ is installed properly
  
 ### Integration
  Once you have license++ properly installed please check out [sample](/sample) code for integration

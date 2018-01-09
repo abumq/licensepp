@@ -3,6 +3,7 @@
 ## [1.0.2] - 09-01-2018
 ### Updates
 - Removed unnecessary zlib dependency
+- Static linking support
 
 ## [1.0.1] - 09-01-2018
 ### Updates

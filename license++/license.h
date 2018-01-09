@@ -13,7 +13,7 @@
 namespace licensepp {
 
 ///
-/// \brief License object
+/// \brief License model
 ///
 class License
 {
@@ -88,6 +88,9 @@ public:
 
     std::string formattedExpiry() const;
 
+    ///
+    /// \brief Loads itself from base64 input
+    ///
     bool load(const std::string& licenseBase64);
 
 protected:

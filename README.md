@@ -14,22 +14,42 @@ License++ is software licensing library that provides an abstract way to secure 
 ## Features
 
  * RSA-Based signing to prevent alteration
- * Custom issuing authority for your software
- * Anyone can validate the license but not everyone can issue new licenses
- * Expiring issuing authority
+ * Custom license keys for your software
+ * Anyone can check the license validity
+ * Restricted issuance of new licenses
+ * Disable issuing authority at anytime
  
 ## Getting Started
 
+### Dependencies
+
+  * C++11
+  * [Crypto++](https://www.cryptopp.com/) v5.6.5+ [with Pem Pack](https://raw.githubusercontent.com/muflihun/muflihun.github.io/master/downloads/pem_pack.zip)
+  * [cmake](https://cmake.org/) v2.8.12+
+  * [zlib-devel](https://zlib.net/)
+  
 ### Installation
  * [Download](https://github.com/muflihun/licensepp/archive/master.zip) or [clone](git@github.com:muflihun/licensepp.git) the repository
+ * Install Crypto++
+ ```
+wget https://raw.githubusercontent.com/muflihun/muflihun.github.io/master/downloads/cryptocpp.tar.gz
+tar xf cryptocpp.tar.gz
+cd cryptopp-CRYPTOPP_5_6_5
+wget https://raw.githubusercontent.com/muflihun/muflihun.github.io/master/downloads/pem_pack.zip
+unzip pem_pack.zip
+cmake .
+make
+make install
+```
  * Use CMake to build the project
      ```
+     cd <project_root>
      mkdir build
      cd build
      cmake ..
      make install
      ```
- * You can build [cli](/cli) tool or [sample](/sample) code to ensure license++ is installed properly
+ * You can build [cli](/cli) tool to ensure license++ is installed properly
  
 ### Integration
  Once you have license++ properly installed please check out [sample](/sample) code for integration
@@ -96,6 +116,31 @@ CLI tool provide ability to generate new licenses and validate existing license.
 ```
 ./license-manager --validate license.file [--signature <signature>]
 ```
+
+## License Format
+Licenses generated using License++ are base64 encoded JSON. They look like as follows:
+
+```
+{
+    "authority_signature":"632DBBF8BC35A2CAA8CBC2952615839F86A40965A00D6F7420BEFF3DA1D35B9E360B5781D326AD6853991BB31452290FF3415C788255B33D391373A4AA9590E0849C8649FCFC98A6DC827DE2CE61AF15DE21E62E069CE1DB20C72352E6C15A825C0A8140CE42FE7B56C1A53981B3598EEE3AD4EDDD07461269AFC2C8B25B4BDD0C7E6A92986E2F0EAEC5E7C4C673C47AB25B3EE46EF0F3B9C8120865B63E68A505DBC2E85F0646BDF3FD082CA62BB647A0BEFF34E0C7CCE40BD84EABFEA7D902A26D33ADA01F75E7291EC35472B4ED328E0E3AE654E85AAEAEB3FFC9E5A7DE4CB08C9ADAC803367DC2845821E0C310BA26EA26DB3196A65445528AABF45888F6",
+    "expiry_date":1528386596,
+    "issue_date":1515426596,
+    "issuing_authority":"sample-license-authority",
+    "licensee":"john-citizen",
+    "licensee_signature":"61663531383163626334303566613461363362343232316632663764393638383A35574F4F4C466B532F7A4F79376446364F6155776C673D3D0D0A0D0A"
+}
+```
+
+### Format Explained
+
+ | Item | Description |
+ | ---- | ----------- |
+ | `authority_signature` | Signature of the authority which prevents alteration in the license |
+ | `expiry_date` | License expiry date epoch |
+ | `issue_date` | License issue date epoch |
+ | `issuing_authority` | ID of issuing authority as per key register |
+ | `licensee` | Name of the license holder |
+ | `licensee_signature` | If licensee signed this license this is encrypted against key provided in key register. All the licenses signed by licensee will be validated against it at validation time. |
 
 ## License
 ```

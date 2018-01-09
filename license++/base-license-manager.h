@@ -20,7 +20,50 @@ namespace licensepp {
 ///
 /// \brief Base license manager
 ///
-template <class Keys>
+/// This class is abstract license manager that needs to be inherited with proper
+/// key register.
+///
+/// The key register must contains two static members.
+///  1. static const unsigned char LICENSE_MANAGER_SIGNATURE_KEY[];
+///  2. static const std::vector<licensepp::IssuingAuthority> LICENSE_ISSUING_AUTHORITIES;
+///
+/// Definitions must be provided as well.
+///
+/// A valid key register looks like as follows
+/// <pre>
+/// class LicenseKeysRegister
+/// {
+/// public:
+///    static const unsigned char LICENSE_MANAGER_SIGNATURE_KEY[];
+///
+///    static const std::vector<IssuingAuthority> LICENSE_ISSUING_AUTHORITIES;
+/// };
+///
+/// const unsigned char LicenseKeysRegister::LICENSE_MANAGER_SIGNATURE_KEY[] =
+/// {
+///    0x27, 0xD4, 0x91, 0x55, 0xE6, 0x6D, 0xC3, 0x11, 0x8D, 0xC0, 0x52, 0x0B, 0x2C, 0x9F, 0x84, 0xF3,
+/// };
+///
+/// const std::vector<IssuingAuthority> LicenseKeysRegister::LICENSE_ISSUING_AUTHORITIES = {
+///    IssuingAuthority("authority_id", "<authority name>", "<keypair>", 24U, true),
+/// };
+/// </pre>
+///
+/// And then your license manager for your software will look like this:
+/// <pre>
+/// class LicenseManager : public BaseLicenseManager<LicenseKeysRegister>
+/// {
+/// public:
+///     LicenseManager()
+///         : BaseLicenseManager()
+///     {
+///     }
+/// };
+/// </pre>
+///
+/// \see https://github.com/muflihun/licensepp/blob/master/sample/
+///
+template <class LicenseKeysRegister>
 class BaseLicenseManager
 {
 public:
@@ -28,13 +71,16 @@ public:
 
     virtual ~BaseLicenseManager() = default;
 
+    ///
+    /// \brief Read and return issuing authority from license
+    ///
     const IssuingAuthority* getIssuingAuthority(const License* license) const
     {
         if (license == nullptr) {
             return nullptr;
         }
         const IssuingAuthority* issuingAuthority = nullptr;
-        for (const auto& a : Keys::LICENSE_ISSUING_AUTHORITIES) {
+        for (const auto& a : LicenseKeysRegister::LICENSE_ISSUING_AUTHORITIES) {
             if (a.id() == license->issuingAuthorityId()) {
                 issuingAuthority = &(a);
             }
@@ -72,7 +118,7 @@ public:
     {
         const IssuingAuthority* issuingAuthority = nullptr;
         // validate using license's authortiy
-        for (const IssuingAuthority& currAuthority : Keys::LICENSE_ISSUING_AUTHORITIES) {
+        for (const IssuingAuthority& currAuthority : LicenseKeysRegister::LICENSE_ISSUING_AUTHORITIES) {
             if (currAuthority.id() == license->issuingAuthorityId()) {
                 if (!currAuthority.active()) {
                     std::cerr << "Issuing authority " << license->issuingAuthorityId()
@@ -94,7 +140,7 @@ private:
     inline std::string keydec() const
     {
         const std::string b16list = "0123456789ABCDEF";
-        const unsigned char* key = Keys::LICENSE_MANAGER_SIGNATURE_KEY;
+        const unsigned char* key = LicenseKeysRegister::LICENSE_MANAGER_SIGNATURE_KEY;
         std::stringstream ss;
         for (auto i = 0; i < 16; ++i) {
             ss << b16list[key[i] >> 4] << b16list[key[i] & 0xf];

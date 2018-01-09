@@ -1,0 +1,7 @@
+PROJECT_NAME=License++
+PROJECT_BRIEF="Software licensing library"
+OUTPUT_DIRECTORY=build/doc
+INPUT=doxygen/README_DOXYGEN.md license++/base-license-manager.h license++/issuing-authority.h license++/license-exception.h license++/license.h
+USE_MDFILE_AS_MAINPAGE=doxygen/README_DOXYGEN.md
+HTML_EXTRA_STYLESHEET=doxygen/customdoxygen.css
+LAYOUT_FILE=doxygen/DoxygenLayout.xml

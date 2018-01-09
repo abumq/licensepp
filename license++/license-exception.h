@@ -8,20 +8,21 @@
 #ifndef LicenseException_h
 #define LicenseException_h
 
-#include <exception>
+#include <stdexcept>
 
 namespace licensepp {
 
+class LicenseExceptionBase { };
 ///
-/// \brief Exception thrown by all the residue helper and internal methods
+/// \brief Exception thrown by all the license++ functions
 ///
-class LicenseException : public std::runtime_error
+class LicenseException : public LicenseExceptionBase, public std::runtime_error
 {
 public:
     ///
     /// \brief Main constructor
     ///
-    LicenseException(const std::string& msg) : runtime_error(msg) {}
+    LicenseException(const std::string& msg) : std::runtime_error(msg) {}
 
     virtual ~LicenseException() = default;
 };

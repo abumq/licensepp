@@ -26,7 +26,6 @@ License++ is software licensing library that provides an abstract way to secure 
   * C++11
   * [Crypto++](https://www.cryptopp.com/) v5.6.5+ [with Pem Pack](https://raw.githubusercontent.com/muflihun/muflihun.github.io/master/downloads/pem_pack.zip)
   * [cmake](https://cmake.org/) v2.8.12+
-  * [zlib-devel](https://zlib.net/)
   
 ### Installation
  * [Download](https://github.com/muflihun/licensepp/archive/master.zip) or [clone](git@github.com:muflihun/licensepp.git) the repository
@@ -48,6 +47,11 @@ License++ is software licensing library that provides an abstract way to secure 
      cd build
      cmake ..
      make install
+
+     ## build with test
+     cmake -Dtest=ON ..
+     make install
+     ./licensepp-unit-tests
      ```
  * You can build [cli](/cli) tool to ensure license++ is installed properly
  

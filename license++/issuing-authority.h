@@ -19,7 +19,9 @@ namespace licensepp {
 class IssuingAuthority
 {
 public:
-    IssuingAuthority(const std::string& id, const std::string& name, const std::string& keypair, unsigned int maxValidity, bool active = true);
+    IssuingAuthority(const std::string& id, const std::string& name,
+                     const std::string& keypair, unsigned int maxValidity,
+                     bool active = true);
 
     IssuingAuthority(const IssuingAuthority&);
     IssuingAuthority& operator=(IssuingAuthority);

@@ -13,7 +13,7 @@
 namespace licensepp {
 
 ///
-/// \brief Exception thrown by all the residue helper and internal methods
+/// \brief Exception thrown by all the license++ functions
 ///
 class LicenseException : public std::runtime_error
 {

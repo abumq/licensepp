@@ -30,7 +30,7 @@ namespace licensepp {
 /// Definitions must be provided as well.
 ///
 /// A valid key register looks like as follows
-/// <code>
+/// <pre>
 /// class LicenseKeysRegister
 /// {
 /// public:
@@ -47,10 +47,10 @@ namespace licensepp {
 /// const std::vector<IssuingAuthority> LicenseKeysRegister::LICENSE_ISSUING_AUTHORITIES = {
 ///    IssuingAuthority("authority_id", "<authority name>", "<keypair>", 24U, true),
 /// };
-/// </code>
+/// </pre>
 ///
 /// And then your license manager for your software will look like this:
-/// <code>
+/// <pre>
 /// class LicenseManager : public BaseLicenseManager<LicenseKeysRegister>
 /// {
 /// public:
@@ -59,7 +59,7 @@ namespace licensepp {
 ///     {
 ///     }
 /// };
-/// </code>
+/// </pre>
 ///
 /// \see https://github.com/muflihun/licensepp/blob/master/sample/
 ///

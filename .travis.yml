@@ -114,6 +114,7 @@ install:
  - cmake -Dtest=ON -Dtravis=ON ..
  - sudo make
  - sudo make install
+ - export LD_LIBRARY_PATH=/usr/local/lib
  - ls -l
 
 script: "./licensepp-unit-tests --gtest_catch_exceptions=0"

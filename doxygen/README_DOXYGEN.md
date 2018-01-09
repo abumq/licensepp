@@ -1,11 +1,11 @@
                                        ‫بسم الله الرَّحْمَنِ الرَّحِيمِ
 
-License++
+# License++
     
-# Introduction
+## Introduction
 License++ is a cross platform software licensing library which allows you to implement licensing into your application. It provides you all tools to issue and validate licenses.
 
-# Licence
+## Licence
 
 ```
 Copyright (c) 2018-present Muflihun Labs

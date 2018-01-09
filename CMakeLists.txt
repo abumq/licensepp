@@ -14,7 +14,7 @@ set (LICENSEPP_SOVERSION "${LICENSEPP_MAJOR}.${LICENSEPP_MINOR}.${LICENSEPP_PATC
 set (LICENSEPP_NAME "licensepp")
 
 add_definitions (-DLICENSEPP_SOVERSION="${LICENSEPP_SOVERSION}")
-add_definitions (-DRIPE_VERSION="4.0.1-static")
+add_definitions (-DRIPE_VERSION="4.0.1-custom-static")
 if (travis)
     add_definitions (-DLICENSEPP_ON_CI)
 endif()
@@ -35,15 +35,7 @@ if (APPLE)
     endif()
 endif()
 
-list (APPEND CMAKE_CXX_FLAGS " -std=c++11 -O3 -Wall -Werror -Wno-unknown-warning-option -Wno-pessimizing-move ")
-
-find_package(ZLIB REQUIRED)
-if (ZLIB_FOUND)
-    include_directories(${ZLIB_INCLUDE_DIRS})
-    message ("-- libz: " ${ZLIB_LIBRARIES} " version: " ${ZLIB_VERSION_STRING})
-else()
-    message ("--==> libz not found")
-endif(ZLIB_FOUND)
+list (APPEND CMAKE_CXX_FLAGS " -std=c++11 -O3 -Wall -Werror ")
 
 # Check for cryptopp (static)
 set(CryptoPP_USE_STATIC_LIBS ON)
@@ -78,7 +70,6 @@ set_target_properties (licensepp-lib PROPERTIES
     VERSION ${LICENSEPP_SOVERSION}
 )
 target_link_libraries (licensepp-lib
-    ${ZLIB_LIBRARIES}
     ${CRYPTOPP_LIBRARIES}
 )
 
@@ -133,7 +124,7 @@ if (test)
     # Extra linking for the project.
     target_link_libraries (licensepp-unit-tests licensepp)
 
-    target_link_libraries (licensepp-unit-tests ${SHARED_REQUIRED_LIBS})
+    target_link_libraries (licensepp-unit-tests ${CRYPTOPP_LIBRARIES})
 
     add_test (NAME licenseppUnitTests COMMAND licensepp-unit-tests)
 endif() ## test

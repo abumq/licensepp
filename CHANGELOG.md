@@ -1,5 +1,9 @@
 # Change Log
 
+## [1.0.3] - 10-01-2018
+### Fixes
+- Fix date format across different timezones
+
 ## [1.0.2] - 09-01-2018
 ### Updates
 - Removed unnecessary zlib dependency

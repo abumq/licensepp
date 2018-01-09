@@ -31,16 +31,16 @@ License++ is software licensing library that provides an abstract way to secure 
 ### Installation
  * [Download](https://github.com/muflihun/licensepp/archive/master.zip) or [clone](git@github.com:muflihun/licensepp.git) the repository
  * Install Crypto++
- ```
-wget https://raw.githubusercontent.com/muflihun/muflihun.github.io/master/downloads/cryptocpp.tar.gz
-tar xf cryptocpp.tar.gz
-cd cryptopp-CRYPTOPP_5_6_5
-wget https://raw.githubusercontent.com/muflihun/muflihun.github.io/master/downloads/pem_pack.zip
-unzip pem_pack.zip
-cmake .
-make
-make install
-```
+     ```
+     wget https://raw.githubusercontent.com/muflihun/muflihun.github.io/master/downloads/cryptocpp.tar.gz
+     tar xf cryptocpp.tar.gz
+     cd cryptopp-CRYPTOPP_5_6_5
+     wget https://raw.githubusercontent.com/muflihun/muflihun.github.io/master/downloads/pem_pack.zip
+     unzip pem_pack.zip
+     cmake .
+     make
+     make install
+     ```
  * Use CMake to build the project
      ```
      cd <project_root>

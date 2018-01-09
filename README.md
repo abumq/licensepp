@@ -97,7 +97,7 @@ CLI tool provide ability to generate new licenses and validate existing license.
 ./license-manager --validate license.file [--signature <signature>]
 ```
 
-### License Format
+## License Format
 Licenses generated using License++ are base64 encoded JSON. They look like as follows:
 
 ```
@@ -113,12 +113,14 @@ Licenses generated using License++ are base64 encoded JSON. They look like as fo
 
 ### Format Explained
 
- * `authority_signature` - Signature of the authority which prevents alteration in the license
- * `expiry_date` - License expiry date epoch
- * `issue_date` - License issue date epoch
- * `issuing_authority` - ID of issuing authority as per key register
- * `licensee` - Name of the license holder
- * `licensee_signature` - If licensee signed this license this is encrypted against key provided in key register. All the licenses signed by licensee will be validated against it at validation time.
+ | Item | Description |
+ | ---- | ----------- |
+ | `authority_signature` | Signature of the authority which prevents alteration in the license |
+ | `expiry_date` | License expiry date epoch |
+ | `issue_date` | License issue date epoch |
+ | `issuing_authority` | ID of issuing authority as per key register |
+ | `licensee` | Name of the license holder |
+ | `licensee_signature` | If licensee signed this license this is encrypted against key provided in key register. All the licenses signed by licensee will be validated against it at validation time. |
 
 ## License
 ```

@@ -84,8 +84,14 @@ public:
 
     std::string toString();
 
+    ///
+    /// \brief Returns raw format of license
+    ///
     std::string raw() const;
 
+    ///
+    /// \brief Returns expiry date in <pre>%d %b, %Y %H:%m UTC</pre> format
+    ///
     std::string formattedExpiry() const;
 
     ///

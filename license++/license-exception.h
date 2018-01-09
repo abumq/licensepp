@@ -12,7 +12,7 @@
 
 namespace licensepp {
 
-class LicenseExceptionBase { };
+class LicenseExceptionBase {};
 ///
 /// \brief Exception thrown by all the license++ functions
 ///

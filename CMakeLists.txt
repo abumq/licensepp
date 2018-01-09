@@ -14,7 +14,7 @@ set (LICENSEPP_SOVERSION "${LICENSEPP_MAJOR}.${LICENSEPP_MINOR}.${LICENSEPP_PATC
 set (LICENSEPP_NAME "licensepp")
 
 add_definitions (-DLICENSEPP_SOVERSION="${LICENSEPP_SOVERSION}")
-add_definitions (-DRIPE_VERSION="4.0.1-static-no-zip")
+add_definitions (-DRIPE_VERSION="4.0.1-custom-static")
 if (travis)
     add_definitions (-DLICENSEPP_ON_CI)
 endif()

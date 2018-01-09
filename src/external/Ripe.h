@@ -1,11 +1,13 @@
 //
 //  Ripe.cc
 //
-//  Copyright (c) 2017, Muflihun Labs
+//  Copyright (c) 2017-present, Muflihun Labs
 //
 //  https://muflihun.com
 //  https://muflihun.github.io/ripe
 //  https://github.com/muflihun
+//
+//  [This is custom version of Ripe for License++]
 //
 
 #ifndef Ripe_h

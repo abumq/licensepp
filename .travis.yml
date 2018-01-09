@@ -1,0 +1,119 @@
+language: cpp
+dist: trusty
+sudo: required
+matrix:
+  include:
+  - os: linux
+    compiler: clang
+    before_install:
+    - sudo add-apt-repository ppa:kubuntu-ppa/backports -y
+    - sudo apt-get -qq update
+    - sudo apt-get install -y libgtest-dev
+    - sudo apt-get install --only-upgrade cmake
+    - g++ -v
+    
+  - os: linux
+    compiler: gcc
+    env:
+      - COMPILER=g++-4.9
+    addons:
+      apt:
+        sources: ['ubuntu-toolchain-r-test']
+        packages: [g++-4.9, valgrind]
+    before_install:
+    - CXX=$COMPILER
+    - sudo add-apt-repository ppa:kubuntu-ppa/backports -y
+    - sudo apt-get -qq update
+    - sudo apt-get install -y libboost-system-dev libgtest-dev
+    - sudo apt-get install --only-upgrade cmake
+
+  - os: linux
+    compiler: gcc
+    env:
+      - COMPILER=g++-5
+    addons:
+      apt:
+        sources: ['ubuntu-toolchain-r-test']
+        packages: [g++-5, valgrind]
+    before_install:
+    - CXX=$COMPILER
+    - sudo add-apt-repository ppa:kubuntu-ppa/backports -y
+    - sudo apt-get -qq update
+    - sudo apt-get install -y libboost-system-dev libgtest-dev
+    - sudo apt-get install --only-upgrade cmake
+    
+  - os: linux
+    compiler: gcc
+    env:
+      - COMPILER=g++-6
+    addons:
+      apt:
+        sources: ['ubuntu-toolchain-r-test']
+        packages: [g++-6, valgrind]
+    before_install:
+    - CXX=$COMPILER
+    - sudo add-apt-repository ppa:kubuntu-ppa/backports -y
+    - sudo apt-get -qq update
+    - sudo apt-get install -y libboost-system-dev libgtest-dev
+    - sudo apt-get install --only-upgrade cmake
+    
+  - os: linux
+    compiler: gcc
+    env:
+      - COMPILER=g++-7
+    addons:
+      apt:
+        sources: ['ubuntu-toolchain-r-test']
+        packages: [g++-7, valgrind]
+    before_install:
+    - CXX=$COMPILER
+    - sudo add-apt-repository ppa:kubuntu-ppa/backports -y
+    - sudo apt-get -qq update
+    - sudo apt-get install -y libboost-system-dev libgtest-dev
+    - sudo apt-get install --only-upgrade cmake
+    
+#  - os: osx
+#    compiler: clang
+#    osx_image: xcode8
+#     - sudo port install boost
+#     - g++ -v
+#     - cmake -v
+    
+install:
+ - cmake --version 
+ - uname -a
+
+## GTest
+ - wget -O gtest.tar.gz https://github.com/google/googletest/archive/release-1.7.0.tar.gz
+ - tar xf gtest.tar.gz
+ - cd googletest-release-1.7.0
+ - cmake -DBUILD_SHARED_LIBS=ON .
+ - make
+ - ls -l
+ - sudo cp -a include/gtest /usr/include
+ - sudo cp -a libgtest_main.* libgtest.* /usr/lib/
+ - cd ..
+
+## Crypto++ (We dont need this for residue, we need it for ripe and mine)
+ - wget https://raw.githubusercontent.com/muflihun/muflihun.github.io/master/downloads/cryptocpp.tar.gz
+ - tar xf cryptocpp.tar.gz
+ - cd cryptopp-CRYPTOPP_5_6_5
+ - wget https://raw.githubusercontent.com/muflihun/muflihun.github.io/master/downloads/pem_pack.zip
+ - unzip pem_pack.zip
+ - cmake .
+ - make
+ - sudo make install
+
+## Build
+ - cd "${TRAVIS_BUILD_DIR}"
+ - mkdir build
+ - cd build
+ - cmake -Dtest=ON -Dtravis=ON ..
+ - sudo make
+ - ls -l
+
+script: "./licensepp-unit-tests --gtest_catch_exceptions=0"
+branches:
+  only:
+    - master
+    - develop

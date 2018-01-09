@@ -2,7 +2,9 @@ cmake_minimum_required (VERSION 2.8.12)
 
 project (licensepp)
 
+option (test "Build all tests" OFF)
 option (BUILD_SHARED_LIBS "build shared libraries" ON)
+option (travis "Travis CI" OFF)
 
 set (LICENSEPP_MAJOR "1")
 set (LICENSEPP_MINOR "0")
@@ -13,6 +15,9 @@ set (LICENSEPP_NAME "licensepp")
 
 add_definitions (-DLICENSEPP_SOVERSION="${LICENSEPP_SOVERSION}")
 add_definitions (-DRIPE_VERSION="4.0.1-static")
+if (travis)
+    add_definitions (-DLICENSEPP_ON_CI)
+endif()
 
 set (CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake")
 
@@ -73,7 +78,7 @@ target_link_libraries (licensepp-lib
     ${CRYPTOPP_LIBRARIES}
 )
 
-set_target_properties (licensepp-lib PROPERTIES OUTPUT_NAME "license")
+set_target_properties (licensepp-lib PROPERTIES OUTPUT_NAME "licensepp")
 install (TARGETS licensepp-lib DESTINATION lib)
 install (FILES license++/base-license-manager.h DESTINATION "include/license++")
 install (FILES license++/issuing-authority.h DESTINATION "include/license++")
@@ -102,3 +107,29 @@ configure_file (
 
 include_directories (${CMAKE_BINARY_DIR})
 include_directories (${CMAKE_SOURCE_DIR})
+
+if (test)
+
+    find_package (gtest REQUIRED)
+
+    include_directories (${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
+
+    enable_testing()
+
+    add_executable (licensepp-unit-tests
+        test/license-manager-for-test.h
+        test/license-manager-test.h
+        test/main.cc
+        test/test.h
+    )
+
+    # Standard linking to gtest stuff.
+    target_link_libraries (licensepp-unit-tests gtest gtest_main)
+
+    # Extra linking for the project.
+    target_link_libraries (licensepp-unit-tests licensepp)
+
+    target_link_libraries (licensepp-unit-tests ${SHARED_REQUIRED_LIBS})
+
+    add_test (NAME licenseppUnitTests COMMAND licensepp-unit-tests)
+endif() ## test

@@ -1,4 +1,4 @@
-license-manager: main.cc
+license-manager: main.cc licensing/license-manager-key-register.cc
 	g++ main.cc licensing/license-manager-key-register.cc -I/usr/local/lib -llicensepp -std=c++11 -O3 -o license-manager
 
 

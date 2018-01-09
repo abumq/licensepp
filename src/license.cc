@@ -6,6 +6,8 @@
 //
 
 #include <ctime>
+#include <fstream>
+#include <iterator>
 #include <license++/license.h>
 #include <license++/license-exception.h>
 #include "src/crypto/base64.h"
@@ -18,7 +20,6 @@ License::License() :
     m_issueDate(0),
     m_expiryDate(0)
 {
-
 }
 
 License::License(const License& other):
@@ -46,7 +47,6 @@ std::string License::formattedExpiry() const
     tval.tv_sec = static_cast<long>(m_expiryDate);
     return Utils::timevalToString(tval, "%d %b, %Y %H:%m UTC");
 }
-
 
 std::string License::toString()
 {
@@ -92,6 +92,23 @@ bool License::load(const std::string& licenseBase64)
         return true;
     } catch (const std::exception& e) {
         throw LicenseException("Failed to load the license: " + std::string(e.what()));
+    }
+    return false;
+}
+
+bool License::loadFromFile(const std::string& licenseFile)
+{
+    if (!licenseFile.empty()) {
+        std::ifstream stream(licenseFile);
+        if (!stream.is_open()) {
+            std::cerr << "Failed to open file " << licenseFile << std::endl;
+            return false;
+        } else {
+            std::string licenseContents = std::string((std::istreambuf_iterator<char>(stream)),
+                                                      (std::istreambuf_iterator<char>()));
+            stream.close();
+            return load(licenseContents);
+        }
     }
     return false;
 }

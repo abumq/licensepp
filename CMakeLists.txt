@@ -68,7 +68,11 @@ set(LICENSEPP_SOURCE_FILES
     src/license.cc
 )
 
-add_library (licensepp-lib ${LICENSEPP_SOURCE_FILES})
+if (BUILD_SHARED_LIBS)
+    add_library (licensepp-lib SHARED ${LICENSEPP_SOURCE_FILES})
+else()
+    add_library (licensepp-lib STATIC ${LICENSEPP_SOURCE_FILES})
+endif()
 
 set_target_properties (licensepp-lib PROPERTIES
     VERSION ${LICENSEPP_SOVERSION}

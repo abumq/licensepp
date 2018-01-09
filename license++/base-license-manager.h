@@ -63,7 +63,7 @@ namespace licensepp {
 ///
 /// \see https://github.com/muflihun/licensepp/blob/master/sample/
 ///
-template <class KeyRegister>
+template <class LicenseKeysRegister>
 class BaseLicenseManager
 {
 public:

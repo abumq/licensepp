@@ -96,8 +96,15 @@ public:
 
     ///
     /// \brief Loads itself from base64 input
+    /// \throws LicenseException if license is invalid
     ///
     bool load(const std::string& licenseBase64);
+
+    ///
+    /// \brief Loads itself from license file containing base64 license
+    /// \throws LicenseException if license is invalid
+    ///
+    bool loadFromFile(const std::string& licensefile);
 
 protected:
 

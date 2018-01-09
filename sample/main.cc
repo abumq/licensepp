@@ -27,24 +27,21 @@ int main(int argc, char* argv[])
         }
     }
     
-    LicenseManager licenseManager;
     if (!licenseFile.empty()) {
-        std::ifstream stream(licenseFile);
-        if (!stream.is_open()) {
-            std::cerr << "Failed to open file " << licenseFile << std::endl;
-        } else {
-            
-            std::string licenseKey = std::string((std::istreambuf_iterator<char>(stream)),
-                                                 (std::istreambuf_iterator<char>()));
-            stream.close();
-            License license;
-            license.load(licenseKey);
-            if (!licenseManager.validate(&license, true, signature)) {
-                std::cout << "License is not valid";
-            } else {
-                std::cout << "Licensed to " << license.licensee() << std::endl;
-                std::cout << "Subscription is active until " << license.formattedExpiry() << std::endl << std::endl;
+        License license;
+        try {
+            if (license.loadFromFile(licenseFile)) {
+                LicenseManager licenseManager;
+                if (!licenseManager.validate(&license, true, signature)) {
+                    std::cout << "License is not valid";
+                } else {
+                    std::cout << "Licensed to " << license.licensee() << std::endl;
+                    std::cout << "Subscription is active until " << license.formattedExpiry() << std::endl << std::endl;
+                }
+                
             }
+        } catch (LicenseException& e) {
+            std::cerr << "Exception thrown " << e.what() << std::endl;
         }
     } else {
         std::cout << "License file not provided" << std::endl;

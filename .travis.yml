@@ -108,6 +108,9 @@ install:
  - cd "${TRAVIS_BUILD_DIR}"
  - mkdir build
  - cd build
+ - cmake -Dtest=OFF -Dtravis=ON ..
+ - sudo make
+ - sudo make install
  - cmake -Dtest=ON -Dtravis=ON ..
  - sudo make
  - ls -l

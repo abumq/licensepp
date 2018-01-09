@@ -10,6 +10,7 @@
 #include <license++/license-exception.h>
 #include "src/crypto/base64.h"
 #include "src/json-object.h"
+#include "src/utils.h"
 
 using namespace licensepp;
 
@@ -41,14 +42,9 @@ License& License::operator=(License other)
 
 std::string License::formattedExpiry() const
 {
-    return "formattedExpiry(): NOT IMPLEMENTED";
-    /*
-     // TODO: Fix this - it used el :(
-     struct timeval tval;
+    struct timeval tval;
     tval.tv_sec = static_cast<long>(m_expiryDate);
-    el::base::SubsecondPrecision ssPrec(3);
-    return el::base::utils::DateTime::timevalToString(tval, "%d %b, %Y %H:%m UTC", &ssPrec);
-    */
+    return Utils::timevalToString(tval, "%d %b, %Y %H:%m UTC");
 }
 
 

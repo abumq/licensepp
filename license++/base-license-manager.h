@@ -41,7 +41,8 @@ namespace licensepp {
 ///
 /// const unsigned char LicenseKeysRegister::LICENSE_MANAGER_SIGNATURE_KEY[] =
 /// {
-///    0x27, 0xD4, 0x91, 0x55, 0xE6, 0x6D, 0xC3, 0x11, 0x8D, 0xC0, 0x52, 0x0B, 0x2C, 0x9F, 0x84, 0xF3,
+///    0x27, 0xD4, 0x91, 0x55, 0xE6, 0x6D, 0xC3, 0x11,
+///    0x8D, 0xC0, 0x52, 0x0B, 0x2C, 0x9F, 0x84, 0xF3,
 /// };
 ///
 /// const std::vector<IssuingAuthority> LicenseKeysRegister::LICENSE_ISSUING_AUTHORITIES = {
@@ -68,7 +69,6 @@ class BaseLicenseManager
 {
 public:
     BaseLicenseManager() = default;
-
     virtual ~BaseLicenseManager() = default;
 
     ///
@@ -79,13 +79,12 @@ public:
         if (license == nullptr) {
             return nullptr;
         }
-        const IssuingAuthority* issuingAuthority = nullptr;
         for (const auto& a : LicenseKeysRegister::LICENSE_ISSUING_AUTHORITIES) {
             if (a.id() == license->issuingAuthorityId()) {
-                issuingAuthority = &(a);
+                return &(a);
             }
         }
-        return issuingAuthority;
+        return nullptr;
     }
 
     ///
@@ -102,7 +101,8 @@ public:
                   const std::string& issuingAuthoritySecret = "",
                   const std::string& licenseeSignature = "") const
     {
-        return issuingAuthority->issue(licensee, validityPeriod, keydec(), issuingAuthoritySecret, licenseeSignature);
+        return issuingAuthority->issue(licensee, validityPeriod, keydec(),
+                                       issuingAuthoritySecret, licenseeSignature);
     }
 
     ///
@@ -116,34 +116,33 @@ public:
                   bool verifyLicenseeSignature,
                   const std::string& licenseeSignature = "") const
     {
-        const IssuingAuthority* issuingAuthority = nullptr;
-        // validate using license's authortiy
-        for (const IssuingAuthority& currAuthority : LicenseKeysRegister::LICENSE_ISSUING_AUTHORITIES) {
-            if (currAuthority.id() == license->issuingAuthorityId()) {
-                if (!currAuthority.active()) {
-                    std::cerr << "Issuing authority " << license->issuingAuthorityId()
-                                  << " cannot issue new licenses. Please update your license." << std::endl;
-                }
-                issuingAuthority = &currAuthority;
-                break;
-            }
-        }
+        const IssuingAuthority* issuingAuthority = getIssuingAuthority(license);
         if (issuingAuthority == nullptr) {
-            throw LicenseException("Issuing authority [" + license->issuingAuthorityId() + "] not found");
+            throw LicenseException("Issuing authority [" +
+                                   license->issuingAuthorityId() + "] not found");
+        }
+        if (!issuingAuthority->active()) {
+            std::cerr << "WARN: Issuing authority "
+                      << issuingAuthority->id()
+                      << " cannot issue new licenses. Please update your license."
+                      << std::endl;
         }
         return issuingAuthority->validate(license, keydec(), verifyLicenseeSignature, licenseeSignature);
     }
 private:
+    BaseLicenseManager(const BaseLicenseManager&) = delete;
+    BaseLicenseManager& operator=(const BaseLicenseManager&) = delete;
+
     ///
     /// \brief Decode signature key
     ///
     inline std::string keydec() const
     {
         const std::string b16list = "0123456789ABCDEF";
-        const unsigned char* key = LicenseKeysRegister::LICENSE_MANAGER_SIGNATURE_KEY;
         std::stringstream ss;
         for (auto i = 0; i < 16; ++i) {
-            ss << b16list[key[i] >> 4] << b16list[key[i] & 0xf];
+            ss << b16list[LicenseKeysRegister::LICENSE_MANAGER_SIGNATURE_KEY[i] >> 4]
+                    << b16list[LicenseKeysRegister::LICENSE_MANAGER_SIGNATURE_KEY[i] & 0xf];
         }
         return ss.str();
     }

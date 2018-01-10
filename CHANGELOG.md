@@ -1,5 +1,10 @@
 # Change Log
 
+## [1.0.4] - 10-01-2018
+### Updates
+- Use helper code to prevent duplication in BaseLicenseManager
+- BaseLicenseManager is now non-copyable
+
 ## [1.0.3] - 10-01-2018
 ### Fixes
 - Fix date format across different timezones

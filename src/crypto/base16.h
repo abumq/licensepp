@@ -18,7 +18,6 @@ namespace licensepp {
 class Base16
 {
 public:
-
     static std::string decode(const std::string& encoded);
     static std::string encode(const std::string& raw);
 };

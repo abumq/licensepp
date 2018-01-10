@@ -18,7 +18,6 @@ namespace licensepp {
 class AES
 {
 public:
-
     ///
     /// \brief Decrypts AES-CBC
     /// \param raw Base64 encoded raw data (provided by ref)

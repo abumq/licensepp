@@ -25,9 +25,6 @@ public:
     LicenseException(const std::string& msg) : std::runtime_error(msg) {}
 
     virtual ~LicenseException() = default;
-private:
-    LicenseException(const LicenseException&) = delete;
-    LicenseException& operator=(const LicenseException&) = delete;
 };
 
 }

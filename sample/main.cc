@@ -33,7 +33,7 @@ int main(int argc, char* argv[])
             if (license.loadFromFile(licenseFile)) {
                 LicenseManager licenseManager;
                 if (!licenseManager.validate(&license, true, signature)) {
-                    std::cout << "License is not valid";
+                    std::cout << "License is not valid" << std::endl;
                 } else {
                     std::cout << "Licensed to " << license.licensee() << std::endl;
                     std::cout << "Subscription is active until " << license.formattedExpiry() << std::endl << std::endl;

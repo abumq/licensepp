@@ -39,18 +39,18 @@ int main(int argc, char* argv[])
     std::string secret;
     std::string authority = "default";
     unsigned int period = 0U;
-    bool issue = false;
-    bool validate = false;
+    bool doIssue = false;
+    bool doValidate = false;
     
     for (int i = 0; i < argc; i++) {
         std::string arg(argv[i]);
         if (arg == "--validate" && i < argc) {
             licenseFile = argv[++i];
-            validate = true;
+            doValidate = true;
         } else if (arg == "--signature" && i < argc) {
             signature = argv[++i];
         } else if (arg == "--issue" && i < argc) {
-            issue = true;
+            doIssue = true;
         } else if (arg == "--licensee" && i < argc) {
             licensee = argv[++i];
         } else if (arg == "--period" && i < argc) {
@@ -63,25 +63,21 @@ int main(int argc, char* argv[])
     }
     
     LicenseManager licenseManager;
-    if (validate && !licenseFile.empty()) {
-        std::ifstream stream(licenseFile);
-        if (!stream.is_open()) {
-            std::cerr << "Failed to open file " << licenseFile << std::endl;
-        } else {
-            
-            std::string licenseKey = std::string((std::istreambuf_iterator<char>(stream)),
-                                                 (std::istreambuf_iterator<char>()));
-            stream.close();
-            licensepp::License license;
-            license.load(licenseKey);
-            if (!licenseManager.validate(&license, true, signature)) {
-                std::cout << "License is not valid";
-            } else {
-                std::cout << "Licensed to " << license.licensee() << std::endl;
-                std::cout << "Subscription is active until " << license.formattedExpiry() << std::endl << std::endl;
+    if (doValidate && !licenseFile.empty()) {
+        License license;
+        try {
+            if (license.loadFromFile(licenseFile)) {
+                if (!licenseManager.validate(&license, true, signature)) {
+                    std::cout << "License is not valid" << std::endl;
+                } else {
+                    std::cout << "Licensed to " << license.licensee() << std::endl;
+                    std::cout << "Subscription is active until " << license.formattedExpiry() << std::endl << std::endl;
+                }
             }
+        } catch (LicenseException& e) {
+            std::cerr << "Exception thrown " << e.what() << std::endl;
         }
-    } else if (issue) {
+    } else if (doIssue) {
         const licensepp::IssuingAuthority* issuingAuthority = nullptr;
         for (const auto& a : LicenseManagerKeyRegister::LICENSE_ISSUING_AUTHORITIES) {
             if (a.id() == authority) {

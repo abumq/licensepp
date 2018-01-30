@@ -10,6 +10,7 @@
 
 #include <iostream>
 #include <string>
+#include <sstream>
 #include <vector>
 #include <license++/license.h>
 #include <license++/license-exception.h>

@@ -1,5 +1,8 @@
 # Change Log
 
+## [1.0.5] - 30-01-2018
+- Include missing sstream in base header
+
 ## [1.0.4] - 10-01-2018
 ### Updates
 - Use helper code to prevent duplication in BaseLicenseManager

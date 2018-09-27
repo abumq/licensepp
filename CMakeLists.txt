@@ -78,11 +78,13 @@ target_link_libraries (licensepp-lib
 )
 
 set_target_properties (licensepp-lib PROPERTIES OUTPUT_NAME "licensepp")
-install (TARGETS licensepp-lib DESTINATION lib)
+install (TARGETS licensepp-lib EXPORT licensepp-config DESTINATION lib)
 install (FILES license++/base-license-manager.h DESTINATION "include/license++")
 install (FILES license++/issuing-authority.h DESTINATION "include/license++")
 install (FILES license++/license.h DESTINATION "include/license++")
 install (FILES license++/license-exception.h DESTINATION "include/license++")
+install (EXPORT licensepp-config DESTINATION share/licensepp/cmake)
+export (TARGETS licensepp-lib FILE licensepp-config.cmake)
 
 
 ############## Cmake Package #################

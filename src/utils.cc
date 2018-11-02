@@ -48,8 +48,7 @@ struct ::tm* Utils::buildTimeInfo(struct timeval* currTime, struct ::tm* timeInf
   ::gmtime_r(&rawTime, timeInfo);
   return timeInfo;
 #else
-#  ifdef (_MSC_VER)
-  LICENSEPP_UNUSED(currTime);
+#  ifdef _MSC_VER
   time_t t;
 #    if defined(_USE_32BIT_TIME_T)
   _time32(&t);

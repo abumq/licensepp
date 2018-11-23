@@ -1,9 +1,10 @@
 //
 // License++
 //
-// Copyright © 2018-present Muflihun Labs
+// Copyright © 2018-present Zuhd Web Services
+// https://zuhd.org
 //
-// https://muflihun.github.io/licensepp/
+// See https://github.com/zuhd-org/licensepp/blob/master/LICENSE
 //
 
 #include <cstring>
@@ -27,12 +28,12 @@ int main(int argc, char* argv[])
         displayVersion();
         return 0;
     }
-    
+
     if (argc > 1 && strcmp(argv[1], "--help") == 0) {
         displayUsage();
         return 0;
     }
-    
+
     std::string licenseFile;
     std::string signature;
     std::string licensee;
@@ -41,7 +42,7 @@ int main(int argc, char* argv[])
     unsigned int period = 0U;
     bool doIssue = false;
     bool doValidate = false;
-    
+
     for (int i = 0; i < argc; i++) {
         std::string arg(argv[i]);
         if (arg == "--validate" && i < argc) {
@@ -61,7 +62,7 @@ int main(int argc, char* argv[])
             secret = argv[++i];
         }
     }
-    
+
     LicenseManager licenseManager;
     if (doValidate && !licenseFile.empty()) {
         License license;

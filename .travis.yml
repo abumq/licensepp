@@ -11,7 +11,7 @@ matrix:
     - sudo apt-get install -y libgtest-dev
     - sudo apt-get install --only-upgrade cmake
     - g++ -v
-    
+
   - os: linux
     compiler: gcc
     env:
@@ -41,7 +41,7 @@ matrix:
     - sudo apt-get -qq update
     - sudo apt-get install -y libboost-system-dev libgtest-dev
     - sudo apt-get install --only-upgrade cmake
-    
+
   - os: linux
     compiler: gcc
     env:
@@ -56,7 +56,7 @@ matrix:
     - sudo apt-get -qq update
     - sudo apt-get install -y libboost-system-dev libgtest-dev
     - sudo apt-get install --only-upgrade cmake
-    
+
   - os: linux
     compiler: gcc
     env:
@@ -71,16 +71,16 @@ matrix:
     - sudo apt-get -qq update
     - sudo apt-get install -y libboost-system-dev libgtest-dev
     - sudo apt-get install --only-upgrade cmake
-    
+
 #  - os: osx
 #    compiler: clang
 #    osx_image: xcode8
 #     - sudo port install boost
 #     - g++ -v
 #     - cmake -v
-    
+
 install:
- - cmake --version 
+ - cmake --version
  - uname -a
 
 ## GTest
@@ -95,10 +95,10 @@ install:
  - cd ..
 
 ## Crypto++ (We dont need this for residue, we need it for ripe and mine)
- - wget https://raw.githubusercontent.com/muflihun/muflihun.github.io/master/downloads/cryptocpp.tar.gz
+ - wget https://muflihun.github.io/downloads/cryptocpp.tar.gz
  - tar xf cryptocpp.tar.gz
  - cd cryptopp-CRYPTOPP_5_6_5
- - wget https://raw.githubusercontent.com/muflihun/muflihun.github.io/master/downloads/pem_pack.zip
+ - wget https://muflihun.github.io/downloads/pem_pack.zip
  - unzip pem_pack.zip
  - cmake .
  - make

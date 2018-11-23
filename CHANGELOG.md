@@ -1,5 +1,8 @@
 # Change Log
 
+## [1.0.6] - 24-11-2018
+- Updated license
+
 ## [1.0.5] - 30-01-2018
 - Include missing sstream in base header
 

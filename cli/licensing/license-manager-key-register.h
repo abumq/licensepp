@@ -2,7 +2,10 @@
 //  license-manager.h
 //  License++ CLI
 //
-//  Copyright © 2018-present Muflihun Labs
+//  Copyright © 2018-present Zuhd Web Services
+//  https://zuhd.org
+//
+//  See https://github.com/zuhd-org/licensepp/blob/master/LICENSE 
 //
 
 #ifndef LicenseManagerKeyRegister_h

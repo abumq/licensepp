@@ -4,12 +4,12 @@
 //  TestX 1.0.1
 //  Single header, header only helper for creating test data
 //
-//  Copyright (c) 2017 Muflihun Labs
+//  Copyright (c) 2017 Zuhd Web Services
 //
 //  This library is released under the MIT Licence.
 //
-//  https://github.com/muflihun/testx
-//  https://muflihun.github.io
+//  https://github.com/zuhd-org/testx
+//  https://zuhd.org
 //  http://muflihun.com
 //
 #ifndef MUFLIHUN_TEST_X_H

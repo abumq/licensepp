@@ -6,10 +6,11 @@
 
 License++ is software licensing library that provides an abstract way to secure your software usage.
 
-[![Build Status](https://img.shields.io/travis/muflihun/licensepp/master.svg?)](https://travis-ci.org/muflihun/licensepp/branches)
-[![Build Status](https://img.shields.io/travis/muflihun/licensepp/develop.svg?)](https://travis-ci.org/muflihun/licensepp/branches)
-[![Version](https://img.shields.io/github/release/muflihun/licensepp.svg)](https://github.com/muflihun/licensepp/releases/latest)
-[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.me/MuflihunDotCom/25)
+[![Build Status](https://img.shields.io/travis/zuhd-org/licensepp/master.svg?)](https://travis-ci.org/zuhd-org/licensepp/branches)
+[![Build Status](https://img.shields.io/travis/zuhd-org/licensepp/develop.svg?)](https://travis-ci.org/zuhd-org/licensepp/branches)
+[![Version](https://img.shields.io/github/release/zuhd-org/licensepp.svg)](https://github.com/zuhd-org/licensepp/releases/latest)
+
+[![Donate](https://muflihun.github.io/donate.png?v2)](https://www.paypal.me/zuhd/25)
 
 ## Features
 
@@ -18,23 +19,23 @@ License++ is software licensing library that provides an abstract way to secure 
  * Anyone can check the license validity
  * Restricted issuance of new licenses
  * Disable issuing authority at anytime
- 
+
 ## Getting Started
 
 ### Dependencies
 
   * C++11
-  * [Crypto++](https://www.cryptopp.com/) v5.6.5+ [with Pem Pack](https://raw.githubusercontent.com/muflihun/muflihun.github.io/master/downloads/pem_pack.zip)
+  * [Crypto++](https://www.cryptopp.com/) v5.6.5+ [with Pem Pack](https://muflihun.github.io/downloads/pem_pack.zip)
   * [cmake](https://cmake.org/) v2.8.12+
-  
+
 ### Installation
- * [Download](https://github.com/muflihun/licensepp/archive/master.zip) or [clone](git@github.com:muflihun/licensepp.git) the repository
+ * [Download](https://github.com/zuhd-org/licensepp/archive/master.zip) or [clone](git@github.com:zuhd-org/licensepp.git) the repository
  * Install Crypto++
      ```
-     wget https://raw.githubusercontent.com/muflihun/muflihun.github.io/master/downloads/cryptocpp.tar.gz
+     wget https://muflihun.github.io/downloads/cryptocpp.tar.gz
      tar xf cryptocpp.tar.gz
      cd cryptopp-CRYPTOPP_5_6_5
-     wget https://raw.githubusercontent.com/muflihun/muflihun.github.io/master/downloads/pem_pack.zip
+     wget https://muflihun.github.io/downloads/pem_pack.zip
      unzip pem_pack.zip
      cmake .
      make
@@ -54,16 +55,16 @@ License++ is software licensing library that provides an abstract way to secure 
      ./licensepp-unit-tests
      ```
  * You can build [cli](/cli) tool to ensure license++ is installed properly
- 
+
 ### Integration
  Once you have license++ properly installed please check out [sample](/sample) code for integration
 
 
 ## Generate New Authority Key
  Authority key is what is in [key register](/cli/licensing/license-manager-key-register.cc) (`LICENSE_ISSUING_AUTHORITIES`) You will need to generate a custom key for your software. This key is used to sign the digital license.
- 
+
  Authority key is essentially RSA keypair with `:` seperator. Format of this key can be defined as:
- 
+
  ```
  base64_encode(
   pem_format(
@@ -75,8 +76,8 @@ License++ is software licensing library that provides an abstract way to secure 
   )
  )
  ```
- 
-You can use [ripe](https://github.com/muflihun/ripe) command to generate new authority key or you can use openssl CLI tool to do so
+
+You can use [ripe](https://github.com/zuhd-org/ripe) command to generate new authority key or you can use openssl CLI tool to do so
 ```
 ripe -g --rsa --length 2048 [--secret <secret>]
 ```
@@ -92,7 +93,7 @@ Which is base64-encoded keypair seperated with `:`
 ## Generate New Signature Key
 License++ signature key is what's used to sign the licensee's signature. This is to protect the information with AES-CBC-128. Signature key is defined in 128-bit array in [key register](/cli/licensing/license-manager-key-register.cc) (`LICENSE_MANAGER_SIGNATURE_KEY`)
 
-You can use [ripe](https://github.com/muflihun/ripe) to generate new key
+You can use [ripe](https://github.com/zuhd-org/ripe) to generate new key
 
 ```
 ripe -g --aes --length 128
@@ -148,10 +149,10 @@ Licenses generated using License++ are base64 encoded JSON. They look like as fo
 
 ## License
 ```
-Copyright (c) 2018-present Muflihun Labs
+Copyright (c) 2018-present Zuhd Web Services
 
-https://github.com/muflihun/
-https://muflihun.github.io
+https://github.com/zuhd-org
+https://zuhd.org
 https://muflihun.com
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -167,4 +168,4 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ```
 
- [banner]: https://raw.githubusercontent.com/muflihun/licensepp/develop/licensepp.png
+ [banner]: https://raw.githubusercontent.com/zuhd-org/licensepp/develop/licensepp.png

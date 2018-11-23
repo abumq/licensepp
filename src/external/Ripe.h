@@ -1,11 +1,10 @@
 //
 //  Ripe.cc
-//
-//  Copyright (c) 2017-present, Muflihun Labs
-//
+////
+//  Copyright © 2017-present Zuhd Web Services
+//  https://zuhd.org
 //  https://muflihun.com
-//  https://muflihun.github.io/ripe
-//  https://github.com/muflihun
+//  https://github.com/zuhd-org
 //
 //  [This is custom version of Ripe for License++]
 //

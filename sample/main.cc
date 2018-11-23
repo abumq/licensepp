@@ -1,9 +1,10 @@
 //
 // License++
 //
-// Copyright © 2018-present Muflihun Labs
+//  Copyright © 2018-present Zuhd Web Services
+//  https://zuhd.org
 //
-// https://muflihun.github.io/licensepp/
+//  See https://github.com/zuhd-org/licensepp/blob/master/LICENSE 
 //
 // Usage: ./license-manager-sample --license <license-file> [--signature <signature>]
 
@@ -26,7 +27,7 @@ int main(int argc, char* argv[])
             signature = argv[++i];
         }
     }
-    
+
     if (!licenseFile.empty()) {
         License license;
         try {
@@ -38,7 +39,7 @@ int main(int argc, char* argv[])
                     std::cout << "Licensed to " << license.licensee() << std::endl;
                     std::cout << "Subscription is active until " << license.formattedExpiry() << std::endl << std::endl;
                 }
-                
+
             }
         } catch (LicenseException& e) {
             std::cerr << "Exception thrown " << e.what() << std::endl;

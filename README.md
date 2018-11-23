@@ -168,4 +168,4 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ```
 
- [banner]: https://raw.githubusercontent.com/zuhd-org/licensepp/develop/licensepp.png
+ [banner]: https://github.com/zuhd-org/licensepp/raw/master/licensepp.png

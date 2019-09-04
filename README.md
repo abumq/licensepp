@@ -32,25 +32,26 @@ License++ is software licensing library that provides an abstract way to secure 
  * [Download](https://github.com/zuhd-org/licensepp/archive/master.zip) or [clone](git@github.com:zuhd-org/licensepp.git) the repository
  * Install Crypto++
      ```
-     wget https://muflihun.github.io/downloads/cryptocpp.tar.gz
-     tar xf cryptocpp.tar.gz
-     cd cryptopp-CRYPTOPP_5_6_5
-     wget https://muflihun.github.io/downloads/pem_pack.zip
-     unzip pem_pack.zip
-     cmake .
+     git clone https://github.com/zuhd-org/licensepp
+     git clone https://github.com/weidai11/cryptopp.git
+     git clone https://github.com/noloader/cryptopp-pem.git
+     cp cryptopp-pem/* cryptopp/
+     cd cryptopp
      make
-     make install
+     sudo make install
      ```
  * Use CMake to build the project
      ```
-     cd <project_root>
+     cd licensepp
      mkdir build
      cd build
      cmake ..
+     make
      make install
 
      ## build with test
      cmake -Dtest=ON ..
+     make
      make install
      ./licensepp-unit-tests
      ```

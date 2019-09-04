@@ -144,7 +144,7 @@ bool Ripe::verifyRSA(const std::string& data, const std::string& signatureHex, c
     }
     std::string decodedSignature = Ripe::hexToString(signatureHex);
     bool result = false;
-    RSASS<PKCS1v15,SHA>::Verifier verifier(publicKey);
+    RSASS<PKCS1v15,SHA1>::Verifier verifier(publicKey);
     StringSource ss2(decodedSignature + data, true,
                      new SignatureVerificationFilter(verifier,
                                                      new ArraySink((RipeByte*)&result, sizeof(result))));
@@ -161,7 +161,7 @@ std::string Ripe::signRSA(const std::string& data, const std::string& privateKey
 
     // sign message
     std::string signature;
-    RSASS<PKCS1v15,SHA>::Signer signer(privateKey);
+    RSASS<PKCS1v15,SHA1>::Signer signer(privateKey);
     AutoSeededRandomPool rng;
 
     StringSource ss(data, true,
@@ -227,7 +227,7 @@ Ripe::KeyPair Ripe::generateRSAKeyPair(unsigned int length, const std::string& s
         if (secret.empty()) {
             PEM_Save(snk, privateKey);
         } else {
-            PEM_Save(snk, rng, privateKey, PRIVATE_RSA_ALGORITHM, secret.data(), secret.size());
+            PEM_Save(snk, privateKey, rng, PRIVATE_RSA_ALGORITHM, secret.data(), secret.size());
         }
         snk.MessageEnd();
     }

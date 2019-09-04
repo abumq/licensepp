@@ -47,12 +47,12 @@ License++ is software licensing library that provides an abstract way to secure 
      cd build
      cmake ..
      make
-     make install
+     sudo make install
 
      ## build with test
      cmake -Dtest=ON ..
      make
-     make install
+     sudo make install
      ./licensepp-unit-tests
      ```
  * You can build [cli](/cli) tool to ensure license++ is installed properly

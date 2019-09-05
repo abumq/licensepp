@@ -95,7 +95,6 @@ install:
  - cd ..
 
 ## Crypto++ (We dont need this for residue, we need it for ripe and mine)
- - git clone https://github.com/zuhd-org/licensepp
  - git clone https://github.com/weidai11/cryptopp.git
  - git clone https://github.com/noloader/cryptopp-pem.git
  - cp cryptopp-pem/* cryptopp/
@@ -111,7 +110,7 @@ install:
  - sudo make
  - sudo make install
  - cmake -Dtest=ON -Dtravis=ON ..
- - make
+ - sudo make
  - sudo make install
  - export LD_LIBRARY_PATH=/usr/local/lib
  - ls -l

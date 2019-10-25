@@ -2,10 +2,10 @@
 //  utils.h
 //  License++
 //
-//  Copyright © 2018-present Zuhd Web Services
-//  https://zuhd.org
+//  Copyright © 2018-present Amrayn Web Services
+//  https://amrayn.com
 //
-//  See https://github.com/zuhd-org/licensepp/blob/master/LICENSE 
+//  See https://github.com/amrayn/licensepp/blob/master/LICENSE 
 //
 
 #ifndef Utils_h

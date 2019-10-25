@@ -95,10 +95,10 @@ install:
  - cd ..
 
 ## Crypto++ (We dont need this for residue, we need it for ripe and mine)
- - wget https://muflihun.github.io/downloads/cryptocpp.tar.gz
+ - wget https://amrayn.github.io/downloads/cryptocpp.tar.gz
  - tar xf cryptocpp.tar.gz
  - cd cryptopp-CRYPTOPP_5_6_5
- - wget https://muflihun.github.io/downloads/pem_pack.zip
+ - wget https://amrayn.github.io/downloads/pem_pack.zip
  - unzip pem_pack.zip
  - cmake .
  - make

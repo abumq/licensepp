@@ -2,10 +2,10 @@
 //  base-license-manager.h
 //  License++
 //
-//  Copyright © 2018-present Zuhd Web Services
-//  https://zuhd.org
+//  Copyright © 2018-present Amrayn Web Services
+//  https://amrayn.com
 //
-//  See https://github.com/zuhd-org/licensepp/blob/master/LICENSE
+//  See https://github.com/amrayn/licensepp/blob/master/LICENSE
 //
 
 #ifndef BaseLicenseManager_h
@@ -66,7 +66,7 @@ namespace licensepp {
 /// };
 /// </pre>
 ///
-/// \see https://github.com/muflihun/licensepp/blob/master/sample/
+/// \see https://github.com/amrayn/licensepp/blob/master/sample/
 ///
 template <class LicenseKeysRegister>
 class BaseLicenseManager

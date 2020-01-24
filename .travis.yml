@@ -96,7 +96,7 @@ install:
 
 ## Crypto++ (We dont need this for residue, we need it for ripe and mine)
  - git clone https://github.com/weidai11/cryptopp.git
- - git clone https://github.com/noloader/cryptopp-pem.git
+ - git clone https://github.com/amraynweb/cryptopp-pem.git
  - cp cryptopp-pem/* cryptopp/
  - cd cryptopp
  - make

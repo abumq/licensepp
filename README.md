@@ -6,11 +6,11 @@
 
 License++ is software licensing library that provides an abstract way to secure your software usage.
 
-[![Build Status](https://img.shields.io/travis/zuhd-org/licensepp/master.svg?)](https://travis-ci.org/zuhd-org/licensepp/branches)
-[![Build Status](https://img.shields.io/travis/zuhd-org/licensepp/develop.svg?)](https://travis-ci.org/zuhd-org/licensepp/branches)
-[![Version](https://img.shields.io/github/release/zuhd-org/licensepp.svg)](https://github.com/zuhd-org/licensepp/releases/latest)
+[![Build Status](https://img.shields.io/travis/amrayn/licensepp/master.svg?)](https://travis-ci.org/amrayn/licensepp/branches)
+[![Build Status](https://img.shields.io/travis/amrayn/licensepp/develop.svg?)](https://travis-ci.org/amrayn/licensepp/branches)
+[![Version](https://img.shields.io/github/release/amrayn/licensepp.svg)](https://github.com/amrayn/licensepp/releases/latest)
 
-[![Donate](https://muflihun.github.io/donate.png?v2)](https://www.paypal.me/zuhd/25)
+[![Donate](https://amrayn.github.io/donate.png?v2)](https://amrayn.com/donate)
 
 ## Features
 
@@ -25,16 +25,16 @@ License++ is software licensing library that provides an abstract way to secure 
 ### Dependencies
 
   * C++11
-  * [Crypto++](https://www.cryptopp.com/) v5.6.5+ [with Pem Pack](https://muflihun.github.io/downloads/pem_pack.zip)
+  * [Crypto++](https://www.cryptopp.com/) v5.6.5+ [with Pem Pack](https://amrayn.github.io/downloads/pem_pack.zip)
   * [cmake](https://cmake.org/) v2.8.12+
 
 ### Installation
- * [Download](https://github.com/zuhd-org/licensepp/archive/master.zip) or [clone](git@github.com:zuhd-org/licensepp.git) the repository
+ * [Download](https://github.com/amrayn/licensepp/archive/master.zip) or [clone](git@github.com:amrayn/licensepp.git) the repository
  * Install Crypto++
      ```
-     git clone https://github.com/zuhd-org/licensepp
+     git clone https://github.com/amrayn/licensepp
      git clone https://github.com/weidai11/cryptopp.git
-     git clone https://github.com/noloader/cryptopp-pem.git
+     git clone https://github.com/amraynweb/cryptopp-pem.git
      cp cryptopp-pem/* cryptopp/
      cd cryptopp
      make
@@ -78,7 +78,7 @@ License++ is software licensing library that provides an abstract way to secure 
  )
  ```
 
-You can use [ripe](https://github.com/zuhd-org/ripe) command to generate new authority key or you can use openssl CLI tool to do so
+You can use [ripe](https://github.com/amrayn/ripe) command to generate new authority key or you can use openssl CLI tool to do so
 ```
 ripe -g --rsa --length 2048 [--secret <secret>]
 ```
@@ -94,7 +94,7 @@ Which is base64-encoded keypair seperated with `:`
 ## Generate New Signature Key
 License++ signature key is what's used to sign the licensee's signature. This is to protect the information with AES-CBC-128. Signature key is defined in 128-bit array in [key register](/cli/licensing/license-manager-key-register.cc) (`LICENSE_MANAGER_SIGNATURE_KEY`)
 
-You can use [ripe](https://github.com/zuhd-org/ripe) to generate new key
+You can use [ripe](https://github.com/amrayn/ripe) to generate new key
 
 ```
 ripe -g --aes --length 128
@@ -150,10 +150,10 @@ Licenses generated using License++ are base64 encoded JSON. They look like as fo
 
 ## License
 ```
-Copyright (c) 2018-present Zuhd Web Services
+Copyright (c) 2018-present Amrayn Web Services
 
-https://github.com/zuhd-org
-https://zuhd.org
+https://github.com/amrayn
+https://amrayn.com
 https://muflihun.com
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -169,4 +169,4 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ```
 
- [banner]: https://github.com/zuhd-org/licensepp/raw/master/licensepp.png
+ [banner]: https://github.com/amrayn/licensepp/raw/master/licensepp.png

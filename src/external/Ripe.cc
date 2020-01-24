@@ -1,10 +1,10 @@
 //
 //  Ripe.cc
 //
-//  Copyright © 2017-present Zuhd Web Services
-//  https://zuhd.org
+//  Copyright © 2017-present Amrayn Web Services
+//  https://amrayn.com
 //  https://muflihun.com
-//  https://github.com/zuhd-org
+//  https://github.com/amrayn
 //
 //  [This is custom version of Ripe for License++]
 //

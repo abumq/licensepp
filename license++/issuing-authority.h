@@ -63,7 +63,8 @@ public:
                   unsigned int validityPeriod,
                   const std::string& masterKey,
                   const std::string& secret = "",
-                  const std::string& licenseeSignature = "") const;
+                  const std::string& licenseeSignature = "",
+                  const std::string& additionalPayload = "") const;
 
     ///
     /// \brief validate Validates license

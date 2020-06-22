@@ -63,7 +63,8 @@ License IssuingAuthority::issue(const std::string& licensee,
                                 unsigned int validityPeriod,
                                 const std::string& masterKey,
                                 const std::string& secret,
-                                const std::string& licenseeSignature) const
+                                const std::string& licenseeSignature,
+                                const std::string& additionalPayload) const
 {
     if (licensee.empty()) {
         throw LicenseException("Please provide valid licensee name and signature");
@@ -94,6 +95,7 @@ License IssuingAuthority::issue(const std::string& licensee,
     license.setIssueDate(now);
     license.setExpiryDate(now + (validityPeriod * 3600));
     license.setIssuingAuthorityId(id());
+    license.setAdditionalPayload(additionalPayload);
     if (!licenseeSignature.empty()) {
         try {
             license.setLicenseeSignature(Base16::encode(AES::encrypt(licenseeSignature, masterKey)));

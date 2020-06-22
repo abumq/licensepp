@@ -30,7 +30,8 @@ License::License(const License& other):
     m_expiryDate(other.m_expiryDate),
     m_licensee(other.m_licensee),
     m_issuingAuthorityId(other.m_issuingAuthorityId),
-    m_licenseeSignature(other.m_licenseeSignature)
+    m_licenseeSignature(other.m_licenseeSignature),
+    m_additionalPayload(other.m_additionalPayload)
 {
 }
 
@@ -41,6 +42,7 @@ License& License::operator=(License other)
     std::swap(m_licensee, other.m_licensee);
     std::swap(m_licenseeSignature, other.m_licenseeSignature);
     std::swap(m_issuingAuthorityId, other.m_issuingAuthorityId);
+    std::swap(m_additionalPayload, other.m_additionalPayload);
     return *this;
 }
 
@@ -62,6 +64,9 @@ std::string License::toString()
     j["expiry_date"] = m_expiryDate;
     j["issuing_authority"] = m_issuingAuthorityId;
     j["authority_signature"] = m_authoritySignature;
+    if(!m_additionalPayload.empty()) {
+        j["additional_payload"] = m_additionalPayload;
+    }
     return Base64::encode(j.dump());
 }
 
@@ -75,6 +80,9 @@ std::string License::raw() const
     j["issue_date"] = m_issueDate;
     j["expiry_date"] = m_expiryDate;
     j["issuing_authority"] = m_issuingAuthorityId;
+    if(!m_additionalPayload.empty()) {
+        j["additional_payload"] = m_additionalPayload;
+    }
     return j.dump();
 }
 
@@ -92,6 +100,9 @@ bool License::load(const std::string& licenseBase64)
         setIssueDate(j["issue_date"].get<unsigned long>());
         setExpiryDate(j["expiry_date"].get<unsigned long>());
         setAuthoritySignature(j["authority_signature"].get<std::string>());
+        if (j.count("additional_payload") > 0) {
+            setAdditionalPayload(j["additional_payload"].get<std::string>());
+        }
         return true;
     } catch (const std::exception& e) {
         throw LicenseException("Failed to load the license: " + std::string(e.what()));

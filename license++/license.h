@@ -55,6 +55,11 @@ public:
         m_issueDate = issueDate;
     }
 
+    inline void setAdditionalPayload(const std::string& additionalPayload)
+    {
+        m_additionalPayload = additionalPayload;
+    }
+
     inline std::string licensee() const
     {
         return m_licensee;
@@ -84,6 +89,12 @@ public:
     {
         return m_issueDate;
     }
+
+    inline std::string additionalPayload() const
+    {
+        return m_additionalPayload;
+    }
+
 
     std::string toString();
 
@@ -118,6 +129,7 @@ protected:
     std::string m_issuingAuthorityId;
     std::string m_licenseeSignature;
     std::string m_authoritySignature;
+    std::string m_additionalPayload;
 };
 }
 

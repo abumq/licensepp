@@ -103,10 +103,12 @@ public:
                   unsigned int validityPeriod,
                   const IssuingAuthority* issuingAuthority,
                   const std::string& issuingAuthoritySecret = "",
-                  const std::string& licenseeSignature = "") const
+                  const std::string& licenseeSignature = "",
+                  const std::string& additionalPayload = "") const
     {
         return issuingAuthority->issue(licensee, validityPeriod, keydec(),
-                                       issuingAuthoritySecret, licenseeSignature);
+                                       issuingAuthoritySecret, licenseeSignature,
+                                       additionalPayload);
     }
 
     ///

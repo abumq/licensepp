@@ -15,7 +15,7 @@
 #include "licensing/license-manager.h"
 
 void displayUsage() {
-    std::cout << "USAGE: license-manager [--validate <file> --signature <signature>] [--issue --licensee <licensee> --signature <licensee_signature> --period <validation_period> --authority <issuing_authority> --passphrase <passphrase_for_issuing_authority>]" << std::endl;
+    std::cout << "USAGE: license-manager [--validate <file> --signature <signature>] [--issue --licensee <licensee> --signature <licensee_signature> --period <validation_period> --authority <issuing_authority> --passphrase <passphrase_for_issuing_authority> [--additional_payload <additional data>]]" << std::endl;
 }
 
 void displayVersion() {
@@ -39,6 +39,7 @@ int main(int argc, char* argv[])
     std::string licensee;
     std::string secret;
     std::string authority = "default";
+    std::string additionalPayload;
     unsigned int period = 0U;
     bool doIssue = false;
     bool doValidate = false;
@@ -60,6 +61,8 @@ int main(int argc, char* argv[])
             authority = argv[++i];
         } else if (arg == "--passphrase" && i < argc) {
             secret = argv[++i];
+        } else if (arg == "--additional_payload" && i < argc) {
+            additionalPayload = argv[++i];
         }
     }
 
@@ -89,7 +92,7 @@ int main(int argc, char* argv[])
             std::cout << "Invalid issuing authority." << std::endl;
             return 1;
         }
-        licensepp::License license = licenseManager.issue(licensee, period, issuingAuthority, secret, signature);
+        licensepp::License license = licenseManager.issue(licensee, period, issuingAuthority, secret, signature,additionalPayload);
         std::cout << license.toString() << std::endl;
         std::cout << "Licensed to " << license.licensee() << std::endl;
         std::cout << "Subscription is active until " << license.formattedExpiry() << std::endl << std::endl;

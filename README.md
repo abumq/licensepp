@@ -114,7 +114,7 @@ CLI tool provide ability to generate new licenses and validate existing license.
 
 ### Issue New License
 ```
-./license-manager --issue --licensee john-citizen --period 3600 --authority sample-license-authority [--signature <signature>]
+./license-manager --issue --licensee john-citizen --period 3600 --authority sample-license-authority [--signature <signature>] [--additional-payload <some string>] 
 ```
 
 ### Validate License
@@ -133,7 +133,8 @@ Licenses generated using License++ are base64 encoded JSON. They look like as fo
     "issue_date":1515426596,
     "issuing_authority":"sample-license-authority",
     "licensee":"john-citizen",
-    "licensee_signature":"61663531383163626334303566613461363362343232316632663764393638383A35574F4F4C466B532F7A4F79376446364F6155776C673D3D0D0A0D0A"
+    "licensee_signature":"61663531383163626334303566613461363362343232316632663764393638383A35574F4F4C466B532F7A4F79376446364F6155776C673D3D0D0A0D0A",
+    "additional_payload":"SomeTestData"
 }
 ```
 
@@ -147,6 +148,7 @@ Licenses generated using License++ are base64 encoded JSON. They look like as fo
  | `issuing_authority` | ID of issuing authority as per key register |
  | `licensee` | Name of the license holder |
  | `licensee_signature` | If licensee signed this license this is encrypted against key provided in key register. All the licenses signed by licensee will be validated against it at validation time. |
+ | `additional_payload` | Any string to be embedded into the license |
 
 ## License
 ```

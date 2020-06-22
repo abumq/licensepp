@@ -15,7 +15,7 @@
 #include "licensing/license-manager.h"
 
 void displayUsage() {
-    std::cout << "USAGE: license-manager [--validate <file> --signature <signature>] [--issue --licensee <licensee> --signature <licensee_signature> --period <validation_period> --authority <issuing_authority> --passphrase <passphrase_for_issuing_authority> [--additional_payload <additional data>]]" << std::endl;
+    std::cout << "USAGE: license-manager [--validate <file> --signature <signature>] [--issue --licensee <licensee> --signature <licensee_signature> --period <validation_period> --authority <issuing_authority> --passphrase <passphrase_for_issuing_authority> [--additional-payload <additional data>]]" << std::endl;
 }
 
 void displayVersion() {
@@ -61,7 +61,7 @@ int main(int argc, char* argv[])
             authority = argv[++i];
         } else if (arg == "--passphrase" && i < argc) {
             secret = argv[++i];
-        } else if (arg == "--additional_payload" && i < argc) {
+        } else if (arg == "--additional-payload" && i < argc) {
             additionalPayload = argv[++i];
         }
     }

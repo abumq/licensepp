@@ -25,27 +25,6 @@ License::License() :
 {
 }
 
-License::License(const License& other):
-    m_issueDate(other.m_issueDate),
-    m_expiryDate(other.m_expiryDate),
-    m_licensee(other.m_licensee),
-    m_issuingAuthorityId(other.m_issuingAuthorityId),
-    m_licenseeSignature(other.m_licenseeSignature),
-    m_additionalPayload(other.m_additionalPayload)
-{
-}
-
-License& License::operator=(License other)
-{
-    std::swap(m_issueDate, other.m_issueDate);
-    std::swap(m_expiryDate, other.m_expiryDate);
-    std::swap(m_licensee, other.m_licensee);
-    std::swap(m_licenseeSignature, other.m_licenseeSignature);
-    std::swap(m_issuingAuthorityId, other.m_issuingAuthorityId);
-    std::swap(m_additionalPayload, other.m_additionalPayload);
-    return *this;
-}
-
 std::string License::formattedExpiry() const
 {
     struct timeval tval;

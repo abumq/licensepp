@@ -75,9 +75,6 @@ License IssuingAuthority::issue(const std::string& licensee,
     if (validityPeriod < 24U) {
         throw LicenseException("License cannot be valid for less than 24 hours");
     }
-    if (validityPeriod > 25 * (365 * 24)) {
-        throw LicenseException("License cannot be valid for more than 25 years");
-    }
     if (validityPeriod > maxValidity()) {
         throw LicenseException("License authority " + id() + " cannot issue license valid for more than " + std::to_string(maxValidity()) + " hours");
     }

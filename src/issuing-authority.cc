@@ -78,7 +78,7 @@ License IssuingAuthority::issue(const std::string& licensee,
     if (validityPeriod > maxValidity()) {
         throw LicenseException("License authority " + id() + " cannot issue license valid for more than " + std::to_string(maxValidity()) + " hours");
     }
-    unsigned long long now = Utils::nowUtc();
+    auto now = Utils::nowUtc();
     if (now == 0) {
         // This should never happen with gcc or clang compilers
         std::cerr << "WARN: Could not find UTC time, using local time" << std::endl;
@@ -146,16 +146,16 @@ bool IssuingAuthority::validate(const License* license,
         std::cerr << "Failed to verify the licensing authority. " << e.what() << std::endl;
         return false;
     }
-    unsigned long long now = Utils::nowUtc();
+    auto now = Utils::nowUtc();
     if (now == 0) {
         // This should never happen with gcc or clang compilers
         std::cerr << "WARN: Could not find UTC time, using local time" << std::endl;
         now = static_cast<unsigned long long>(Utils::now());
     }
 
-    long long diff = static_cast<long>(license->expiryDate() - now);
+    auto diff = static_cast<int64_t>(license->expiryDate() - now);
     if (diff < 0) {
-        long long hourDiff = ceil(llabs(diff) / 3600LL);
+        int64_t hourDiff = ceil(llabs(diff) / 3600LL);
         std::cerr << "License was expired " << hourDiff << " hour"
                   << (hourDiff > 1 ? "s" : "") << " ago" << std::endl;
         return false;

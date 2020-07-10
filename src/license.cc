@@ -76,8 +76,8 @@ bool License::load(const std::string& licenseBase64)
         if (j.count("licensee_signature") > 0) {
             setLicenseeSignature(j["licensee_signature"].get<std::string>());
         }
-        setIssueDate(j["issue_date"].get<unsigned long>());
-        setExpiryDate(j["expiry_date"].get<unsigned long>());
+        setIssueDate(j["issue_date"].get<uint64_t>());
+        setExpiryDate(j["expiry_date"].get<uint64_t>());
         setAuthoritySignature(j["authority_signature"].get<std::string>());
         if (j.count("additional_payload") > 0) {
             setAdditionalPayload(j["additional_payload"].get<std::string>());

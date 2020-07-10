@@ -43,12 +43,12 @@ public:
         m_authoritySignature = authoritySignature;
     }
 
-    inline void setExpiryDate(unsigned long expiryDate)
+    inline void setExpiryDate(uint64_t expiryDate)
     {
         m_expiryDate = expiryDate;
     }
 
-    inline void setIssueDate(unsigned long issueDate)
+    inline void setIssueDate(uint64_t issueDate)
     {
         m_issueDate = issueDate;
     }
@@ -78,12 +78,12 @@ public:
         return m_authoritySignature;
     }
 
-    inline unsigned long expiryDate() const
+    inline uint64_t expiryDate() const
     {
         return m_expiryDate;
     }
 
-    inline unsigned long issueDate() const
+    inline uint64_t issueDate() const
     {
         return m_issueDate;
     }
@@ -120,8 +120,8 @@ public:
 
 protected:
 
-    unsigned long m_issueDate;
-    unsigned long m_expiryDate;
+    uint64_t m_issueDate;
+    uint64_t m_expiryDate;
 
     std::string m_licensee;
     std::string m_issuingAuthorityId;

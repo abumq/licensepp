@@ -1,6 +1,6 @@
 cmake_minimum_required (VERSION 2.8.12)
 
-project (licensepp)
+project (licensepp CXX)
 
 option (test "Build all tests" OFF)
 option (BUILD_SHARED_LIBS "build shared libraries" ON)
@@ -35,10 +35,8 @@ if (APPLE)
     endif()
 endif()
 
-if(MSVC)
-    list (APPEND CMAKE_CXX_FLAGS " -std=c++11 -O3 ")
-else()
-    list (APPEND CMAKE_CXX_FLAGS " -std=c++11 -O3 -Wall -Werror ")
+if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -O3 -Wall -Werror")
 endif()
 
 # Check for cryptopp (static)
@@ -64,15 +62,12 @@ set(LICENSEPP_SOURCE_FILES
     src/license.cc
 )
 
-if (BUILD_SHARED_LIBS)
-    add_library (licensepp-lib SHARED ${LICENSEPP_SOURCE_FILES})
-else()
-    add_library (licensepp-lib STATIC ${LICENSEPP_SOURCE_FILES})
-endif()
+add_library (licensepp-lib ${LICENSEPP_SOURCE_FILES})
 
 set_target_properties (licensepp-lib PROPERTIES
     VERSION ${LICENSEPP_SOVERSION}
 )
+target_include_directories (licensepp-lib PUBLIC $<INSTALL_INTERFACE:include>)
 target_link_libraries (licensepp-lib
     ${CRYPTOPP_LIBRARIES}
 )

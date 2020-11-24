@@ -89,4 +89,16 @@ TEST(LicenseManagerTest, VerificationUsingSecureAuthorityAndSignature)
     ASSERT_EQ(license.formattedExpiry(), "06 Jan, 2028 17:11 UTC");
 }
 
+TEST(LicenseManagerTest, VerificationOfAdditionalPayloadUsingSecureAuthority)
+{
+    const IssuingAuthority* authority2 = &(LicenseManagerKeyRegister::LICENSE_ISSUING_AUTHORITIES.at(3));
+    std::string validLicense = "eyJhZGRpdGlvbmFsX3BheWxvYWQiOiJTb21lUmFuZG9tU3RyaW5nIiwiYXV0aG9yaXR5X3NpZ25hdHVyZSI6IjdBNjU2Qzg3QjdBOUVCRjhFMEVEMzQyMTdEMzIwQjNGQzZCMjAxNEJDRTI1OUZEQTQ3RUI5MzE1OUJGMzQzRTUwMjc5N0YwRjJCMjMwMDFFNjMwMEQwQTAzOTFCNjAzMkI1NUNCQzY4QTAzRkU2OTQ4MTZCN0JGMDA4NzJERTE0NEI2RkNDNkFGQ0E5MjRGNzEzRTZCQUQzQkZBRUI1QzU5RkUwNkUyNEI5RDA3QjMxN0QzRTc2N0RBOTcwNUY3REFDOUU2QzcxMUNCRDBBMzc3RjA5NTY5MTlENkZGMjk5NkMzN0U4OEM0NzFENzM3QjQwMUIxMzk1NzVCNEZDMzJGQzlBMkEyRUJGMTY0NjIxMjg1Qzk2NkM5NjZGRjI2MEMwOEQ1ODA2NUU5RkJFQTk5QUE5OTcwRDVCODZENzJDMDc2Nzg1NzkwQzk5NDIzRjYwMTdBMjcwNzY4RkQ1QzBGQjhFRDU4MERFOTg1QzlDMTM3OEQ3MTQ1QkQ4QzhCRDIzQzRBRDdBMkE0QzhDQ0NFQUU4NkI3OEYxODU4NDk4ODFGODZBNjBEQzhGMUFCNjI0M0I2RDBGOTUzNjI1QkMzREExMkRGNjE5Njc2MDIwQjEyQkU1QUEyNUIwQTVGMDJGMzFDREQ1ODExOUIxQzFDMjI1RTZDQUE5RjM2QzQ4IiwiZXhwaXJ5X2RhdGUiOjE5MDk1MTY1MjIsImlzc3VlX2RhdGUiOjE1OTQxNTY1MjIsImlzc3VpbmdfYXV0aG9yaXR5Ijoic2FtcGxlLWxpY2Vuc2UtYXV0aG9yaXR5IiwibGljZW5zZWUiOiJ1bml0LXRlc3QifQ==";
+    LicenseManagerForTest licenseManager;
+    std::cout << "Verify using " << authority2->id() << std::endl;
+    License license;
+    license.load(validLicense);
+    ASSERT_TRUE(licenseManager.validate(&license, false));
+    ASSERT_EQ(license.additionalPayload(),"SomeRandomString");
+}
+
 #endif // LICENSE_MANAGER_TEST_H

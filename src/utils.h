@@ -79,12 +79,12 @@ public:
     static const char* kMonths[12];
     static const char* kMonthsAbbrev[12];
 
-    static inline unsigned long now()
+    static inline uint64_t now()
     {
         return std::chrono::system_clock::now().time_since_epoch() / std::chrono::seconds(1);
     }
 
-    static unsigned long long nowUtc();
+    static uint64_t nowUtc();
 
     static std::string timevalToString(struct timeval tval, const char* format);
     static struct ::tm* buildTimeInfo(struct timeval* currTime, struct ::tm* timeInfo);

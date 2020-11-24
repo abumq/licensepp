@@ -22,8 +22,6 @@ class License
 {
 public:
     License();
-    License(const License&);
-    License& operator=(License);
 
     inline void setLicensee(const std::string& licensee)
     {
@@ -45,14 +43,19 @@ public:
         m_authoritySignature = authoritySignature;
     }
 
-    inline void setExpiryDate(unsigned long expiryDate)
+    inline void setExpiryDate(uint64_t expiryDate)
     {
         m_expiryDate = expiryDate;
     }
 
-    inline void setIssueDate(unsigned long issueDate)
+    inline void setIssueDate(uint64_t issueDate)
     {
         m_issueDate = issueDate;
+    }
+
+    inline void setAdditionalPayload(const std::string& additionalPayload)
+    {
+        m_additionalPayload = additionalPayload;
     }
 
     inline std::string licensee() const
@@ -75,15 +78,21 @@ public:
         return m_authoritySignature;
     }
 
-    inline unsigned long expiryDate() const
+    inline uint64_t expiryDate() const
     {
         return m_expiryDate;
     }
 
-    inline unsigned long issueDate() const
+    inline uint64_t issueDate() const
     {
         return m_issueDate;
     }
+
+    inline std::string additionalPayload() const
+    {
+        return m_additionalPayload;
+    }
+
 
     std::string toString();
 
@@ -111,13 +120,14 @@ public:
 
 protected:
 
-    unsigned long m_issueDate;
-    unsigned long m_expiryDate;
+    uint64_t m_issueDate;
+    uint64_t m_expiryDate;
 
     std::string m_licensee;
     std::string m_issuingAuthorityId;
     std::string m_licenseeSignature;
     std::string m_authoritySignature;
+    std::string m_additionalPayload;
 };
 }
 

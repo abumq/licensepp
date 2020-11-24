@@ -26,7 +26,7 @@ const char* Utils::kMonthsAbbrev[12] = { "Jan", "Feb", "Mar", "Apr",
                                          "May", "Jun", "Jul", "Aug",
                                          "Sep", "Oct", "Nov", "Dec" };
 
-unsigned long long Utils::nowUtc()
+uint64_t Utils::nowUtc()
 {
     std::time_t t = std::time(nullptr);
     std::tm* nowTm;

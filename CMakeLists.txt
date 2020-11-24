@@ -128,7 +128,7 @@ if (test)
     target_link_libraries (licensepp-unit-tests gtest gtest_main)
 
     # Extra linking for the project.
-    target_link_libraries (licensepp-unit-tests licensepp)
+    target_link_libraries (licensepp-unit-tests licensepp-lib)
 
     target_link_libraries (licensepp-unit-tests ${CRYPTOPP_LIBRARIES})
 

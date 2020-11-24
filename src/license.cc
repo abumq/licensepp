@@ -25,25 +25,6 @@ License::License() :
 {
 }
 
-License::License(const License& other):
-    m_issueDate(other.m_issueDate),
-    m_expiryDate(other.m_expiryDate),
-    m_licensee(other.m_licensee),
-    m_issuingAuthorityId(other.m_issuingAuthorityId),
-    m_licenseeSignature(other.m_licenseeSignature)
-{
-}
-
-License& License::operator=(License other)
-{
-    std::swap(m_issueDate, other.m_issueDate);
-    std::swap(m_expiryDate, other.m_expiryDate);
-    std::swap(m_licensee, other.m_licensee);
-    std::swap(m_licenseeSignature, other.m_licenseeSignature);
-    std::swap(m_issuingAuthorityId, other.m_issuingAuthorityId);
-    return *this;
-}
-
 std::string License::formattedExpiry() const
 {
     struct timeval tval;
@@ -62,6 +43,9 @@ std::string License::toString()
     j["expiry_date"] = m_expiryDate;
     j["issuing_authority"] = m_issuingAuthorityId;
     j["authority_signature"] = m_authoritySignature;
+    if(!m_additionalPayload.empty()) {
+        j["additional_payload"] = m_additionalPayload;
+    }
     return Base64::encode(j.dump());
 }
 
@@ -75,6 +59,9 @@ std::string License::raw() const
     j["issue_date"] = m_issueDate;
     j["expiry_date"] = m_expiryDate;
     j["issuing_authority"] = m_issuingAuthorityId;
+    if(!m_additionalPayload.empty()) {
+        j["additional_payload"] = m_additionalPayload;
+    }
     return j.dump();
 }
 
@@ -89,9 +76,12 @@ bool License::load(const std::string& licenseBase64)
         if (j.count("licensee_signature") > 0) {
             setLicenseeSignature(j["licensee_signature"].get<std::string>());
         }
-        setIssueDate(j["issue_date"].get<unsigned long>());
-        setExpiryDate(j["expiry_date"].get<unsigned long>());
+        setIssueDate(j["issue_date"].get<uint64_t>());
+        setExpiryDate(j["expiry_date"].get<uint64_t>());
         setAuthoritySignature(j["authority_signature"].get<std::string>());
+        if (j.count("additional_payload") > 0) {
+            setAdditionalPayload(j["additional_payload"].get<std::string>());
+        }
         return true;
     } catch (const std::exception& e) {
         throw LicenseException("Failed to load the license: " + std::string(e.what()));

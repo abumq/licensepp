@@ -51,6 +51,7 @@ set(LICENSEPP_SOURCE_FILES
     license++/license.h
     license++/issuing-authority.h
     license++/base-license-manager.h
+    license++/license-c-bindings.h
     src/external/Ripe.cc
     src/utils.cc
     src/json-object.cc
@@ -78,6 +79,7 @@ install (FILES license++/base-license-manager.h DESTINATION "include/license++")
 install (FILES license++/issuing-authority.h DESTINATION "include/license++")
 install (FILES license++/license.h DESTINATION "include/license++")
 install (FILES license++/license-exception.h DESTINATION "include/license++")
+install (FILES license++/license-c-bindings.h DESTINATION "include/license++")
 install (EXPORT licensepp-config DESTINATION share/licensepp/cmake)
 export (TARGETS licensepp-lib FILE licensepp-config.cmake)
 

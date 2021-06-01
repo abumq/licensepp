@@ -61,6 +61,7 @@ set(LICENSEPP_SOURCE_FILES
     src/crypto/rsa.cc
     src/issuing-authority.cc
     src/license.cc
+    src/license-c-bindings.cc
 )
 
 add_library (licensepp-lib ${LICENSEPP_SOURCE_FILES})

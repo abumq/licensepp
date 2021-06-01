@@ -201,23 +201,6 @@ extern "C"
                              int verify_licensee_signature,
                              const char* licensee_signature);
 
-#ifdef __cplusplus
-#include <array>
-#include <vector>
-namespace licensepp {
-class CLicenseKeysRegister {
- public:
-  static const std::array<unsigned char, 16> LICENSE_MANAGER_SIGNATURE_KEY;
-  static const std::vector<::licensepp::IssuingAuthority>
-      LICENSE_ISSUING_AUTHORITIES;
-
-  static void initialize_license_issuing_authorities(
-      const unsigned char* license_manager_signature_key,
-      const IssuingAuthorityParameters* issuing_authority_parameters);
-};
-}  // namespace licensepp
-#endif
-
 typedef struct IssuingAuthorityParameters {
   const char* authority_id;
   const char* authority_name;

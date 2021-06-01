@@ -58,7 +58,7 @@ public:
         m_additionalPayload = additionalPayload;
     }
 
-    inline std::string licensee() const
+    inline const std::string& licensee() const
     {
         return m_licensee;
     }

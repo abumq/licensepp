@@ -6,41 +6,50 @@
 #include <stdio.h>
 #include <string.h>
 
+#include <array>
 #include <cstring>
+#include <vector>
 
 #include "license++/base-license-manager.h"
 
 namespace licensepp {
+class CLicenseKeysRegister {
+ public:
+  static const std::array<unsigned char, 16> LICENSE_MANAGER_SIGNATURE_KEY;
+  static const std::vector<::licensepp::IssuingAuthority>
+      LICENSE_ISSUING_AUTHORITIES;
+
+  static void initialize_license_issuing_authorities(
+      const unsigned char* license_manager_signature_key,
+      const IssuingAuthorityParameters* issuing_authority_parameters) {
+    auto authorities = (std::vector<IssuingAuthority>*)&CLicenseKeysRegister::
+        LICENSE_ISSUING_AUTHORITIES;
+    authorities->clear();
+
+    auto p = issuing_authority_parameters;
+    while (p) {
+      authorities->emplace_back(::licensepp::IssuingAuthority(
+          p->authority_id, p->authority_name, p->keypair, p->max_validity,
+          p->active));
+      p = p->next;
+    }
+
+    auto signature_key =
+        (std::array<unsigned char,
+                    16>*)&CLicenseKeysRegister::LICENSE_MANAGER_SIGNATURE_KEY;
+    memcpy(signature_key->data(), license_manager_signature_key,
+           16 * sizeof(unsigned char));
+  }
+};
+
 const std::array<unsigned char, 16>
     CLicenseKeysRegister::LICENSE_MANAGER_SIGNATURE_KEY = {
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
-const std::vector<IssuingAuthority>
+const std::vector<::licensepp::IssuingAuthority>
     CLicenseKeysRegister::LICENSE_ISSUING_AUTHORITIES =
         std::vector<IssuingAuthority>();
 
-void CLicenseKeysRegister::initialize_license_issuing_authorities(
-    const unsigned char* license_manager_signature_key,
-    const IssuingAuthorityParameters* issuing_authority_parameters) {
-  auto authorities =
-      (std::vector<
-          IssuingAuthority>*)&CLicenseKeysRegister::LICENSE_ISSUING_AUTHORITIES;
-  authorities->clear();
-
-  auto p = issuing_authority_parameters;
-  while (p) {
-    authorities->emplace_back(
-        ::licensepp::IssuingAuthority(p->authority_id, p->authority_name,
-                                      p->keypair, p->max_validity, p->active));
-    p = p->next;
-  }
-
-  auto signature_key =
-      (std::array<unsigned char,
-                  16>*)&CLicenseKeysRegister::LICENSE_MANAGER_SIGNATURE_KEY;
-  memcpy(signature_key->data(), license_manager_signature_key,
-         16 * sizeof(unsigned char));
-}
 }  // namespace licensepp
 
 // License Key Register
@@ -217,16 +226,16 @@ extern "C" void* license_manager_create() {
 }
 
 extern "C" void license_manager_delete(void* license_manager) {
-  ::licensepp::BaseLicenseManager< ::licensepp::CLicenseKeysRegister>* p =
-      (::licensepp::BaseLicenseManager< ::licensepp::CLicenseKeysRegister>*)
+  ::licensepp::BaseLicenseManager<::licensepp::CLicenseKeysRegister>* p =
+      (::licensepp::BaseLicenseManager<::licensepp::CLicenseKeysRegister>*)
           license_manager;
   delete p;
 }
 
 extern "C" const void* license_manager_get_issuing_authority(
     const void* license_manager, const void* license) {
-  ::licensepp::BaseLicenseManager< ::licensepp::CLicenseKeysRegister>* p =
-      (::licensepp::BaseLicenseManager< ::licensepp::CLicenseKeysRegister>*)
+  ::licensepp::BaseLicenseManager<::licensepp::CLicenseKeysRegister>* p =
+      (::licensepp::BaseLicenseManager<::licensepp::CLicenseKeysRegister>*)
           license_manager;
   return p->getIssuingAuthority((const ::licensepp::License*)license);
 }
@@ -236,8 +245,8 @@ extern "C" const void* license_manager_issue(
     unsigned int validity_period, const void* issuing_authority,
     const char* issuing_authority_secret, const char* licensee_signature,
     const char* additional_payload) {
-  ::licensepp::BaseLicenseManager< ::licensepp::CLicenseKeysRegister>* p =
-      (::licensepp::BaseLicenseManager< ::licensepp::CLicenseKeysRegister>*)
+  ::licensepp::BaseLicenseManager<::licensepp::CLicenseKeysRegister>* p =
+      (::licensepp::BaseLicenseManager<::licensepp::CLicenseKeysRegister>*)
           license_manager;
   return new ::licensepp::License(p->issue(
       licensee, validity_period,
@@ -249,8 +258,8 @@ extern "C" int license_manager_validate(const void* license_manager,
                                         const void* license,
                                         int verify_licensee_signature,
                                         const char* licensee_signature) {
-  ::licensepp::BaseLicenseManager< ::licensepp::CLicenseKeysRegister>* p =
-      (::licensepp::BaseLicenseManager< ::licensepp::CLicenseKeysRegister>*)
+  ::licensepp::BaseLicenseManager<::licensepp::CLicenseKeysRegister>* p =
+      (::licensepp::BaseLicenseManager<::licensepp::CLicenseKeysRegister>*)
           license_manager;
   return p->validate((const ::licensepp::License*)license,
                      verify_licensee_signature, licensee_signature);

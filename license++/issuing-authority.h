@@ -29,12 +29,12 @@ public:
     IssuingAuthority(const IssuingAuthority&);
     IssuingAuthority& operator=(IssuingAuthority);
 
-    inline std::string id() const
+    inline const std::string& id() const
     {
         return m_id;
     }
 
-    inline std::string name() const
+    inline const std::string& name() const
     {
         return m_name;
     }

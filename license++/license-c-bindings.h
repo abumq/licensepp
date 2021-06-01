@@ -111,7 +111,7 @@ extern "C"
     void*
     issuing_authority_create(const char* id, const char* name,
                              const char* keypair, unsigned int max_validity,
-                             bool active);
+                             int active);
 
 #ifdef __cplusplus
 extern "C"
@@ -134,7 +134,7 @@ extern "C"
 #ifdef __cplusplus
 extern "C"
 #endif
-    bool
+    int
     issuing_authority_get_active(const void* issuing_authority);
 
 #ifdef __cplusplus
@@ -156,10 +156,10 @@ extern "C"
 #ifdef __cplusplus
 extern "C"
 #endif
-    bool
+    int
     issuing_authority_validate(const void* issuing_authority,
                                const void* license, const char* master_key,
-                               bool validate_signature,
+                               int validate_signature,
                                const char* licensee_signature);
 
 // License Manager
@@ -196,9 +196,9 @@ extern "C"
 #ifdef __cplusplus
 extern "C"
 #endif
-    bool
+    int
     license_manager_validate(const void* license_manager, const void* license,
-                             bool verify_licensee_signature,
+                             int verify_licensee_signature,
                              const char* licensee_signature);
 
 #ifdef __cplusplus
@@ -223,8 +223,8 @@ typedef struct IssuingAuthorityParameters {
   const char* authority_name;
   const char* keypair;
   unsigned int max_validity;
-  bool active;
-  IssuingAuthorityParameters* next;
+  int active;
+  struct IssuingAuthorityParameters* next;
 } IssuingAuthorityParameters;
 
 #ifdef __cplusplus

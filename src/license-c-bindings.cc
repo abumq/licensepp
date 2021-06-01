@@ -139,7 +139,7 @@ extern "C" const char* license_get_additional_payload(const void* license) {
 extern "C" void* issuing_authority_create(const char* id, const char* name,
                                           const char* keypair,
                                           unsigned int max_validity,
-                                          bool active) {
+                                          int active) {
   std::string _id(id);
   std::string _name(name);
   std::string _keypair(keypair);
@@ -166,7 +166,7 @@ extern "C" const char* issuing_authority_get_name(
   return p->name().c_str();
 }
 
-extern "C" bool issuing_authority_get_active(const void* issuing_authority) {
+extern "C" int issuing_authority_get_active(const void* issuing_authority) {
   ::licensepp::IssuingAuthority* p =
       (::licensepp::IssuingAuthority*)issuing_authority;
   return p->active();
@@ -196,11 +196,11 @@ extern "C" void* issuing_authority_issue(
   return new ::licensepp::License(license);
 }
 
-extern "C" bool issuing_authority_validate(const void* issuing_authority,
-                                           const void* license,
-                                           const char* master_key,
-                                           bool validate_signature,
-                                           const char* licensee_signature) {
+extern "C" int issuing_authority_validate(const void* issuing_authority,
+                                          const void* license,
+                                          const char* master_key,
+                                          int validate_signature,
+                                          const char* licensee_signature) {
   ::licensepp::IssuingAuthority* p =
       (::licensepp::IssuingAuthority*)issuing_authority;
   ::licensepp::License* _license = (::licensepp::License*)license;
@@ -245,10 +245,10 @@ extern "C" const void* license_manager_issue(
       issuing_authority_secret, licensee_signature, additional_payload));
 }
 
-extern "C" bool license_manager_validate(const void* license_manager,
-                                         const void* license,
-                                         bool verify_licensee_signature,
-                                         const char* licensee_signature) {
+extern "C" int license_manager_validate(const void* license_manager,
+                                        const void* license,
+                                        int verify_licensee_signature,
+                                        const char* licensee_signature) {
   ::licensepp::BaseLicenseManager< ::licensepp::CLicenseKeysRegister>* p =
       (::licensepp::BaseLicenseManager< ::licensepp::CLicenseKeysRegister>*)
           license_manager;

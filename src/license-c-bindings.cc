@@ -68,6 +68,12 @@ extern "C" void license_delete(void* license) {
   delete p;
 }
 
+extern "C" int license_load(void* license,
+                            const char* license_contents_base64) {
+  ::licensepp::License* p = (::licensepp::License*)license;
+  return p->load(license_contents_base64);
+}
+
 extern "C" void license_set_licensee(void* license, const char* licensee) {
   ::licensepp::License* p = (::licensepp::License*)license;
   p->setLicensee(licensee);

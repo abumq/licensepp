@@ -32,8 +32,7 @@ std::string License::formattedExpiry() const
     return Utils::timevalToString(tval, "%d %b, %Y %H:%m UTC");
 }
 
-std::string License::toString()
-{
+std::string License::toJsonString() {
     JsonObject::Json j;
     j["licensee"] = m_licensee;
     if (!m_licenseeSignature.empty()) {
@@ -46,7 +45,12 @@ std::string License::toString()
     if(!m_additionalPayload.empty()) {
         j["additional_payload"] = m_additionalPayload;
     }
-    return Base64::encode(j.dump());
+    return j.dump();
+}
+
+std::string License::toString()
+{
+    return Base64::encode(toJsonString());
 }
 
 std::string License::raw() const

@@ -47,7 +47,6 @@ int main(int argc, char* argv[])
     for (int i = 0; i < argc; i++) {
         std::string arg(argv[i]);
         if (arg == "--validate" && i < argc) {
-            licenseFile = argv[++i];
             doValidate = true;
         } else if (arg == "--signature" && i < argc) {
             signature = argv[++i];
@@ -92,10 +91,11 @@ int main(int argc, char* argv[])
             std::cout << "Invalid issuing authority." << std::endl;
             return 1;
         }
-        licensepp::License license = licenseManager.issue(licensee, period, issuingAuthority, secret, signature,additionalPayload);
+        licensepp::License license = licenseManager.issue(licensee, period, issuingAuthority, secret, signature, additionalPayload);
         std::cout << license.toString() << std::endl;
         std::cout << "Licensed to " << license.licensee() << std::endl;
         std::cout << "Subscription is active until " << license.formattedExpiry() << std::endl << std::endl;
+        std::cout << "File:" << std::endl << license.toJsonString() << std::endl << std::endl;
     } else {
         displayUsage();
     }

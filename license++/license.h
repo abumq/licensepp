@@ -93,6 +93,7 @@ public:
         return m_additionalPayload;
     }
 
+    std::string toJsonString();
 
     std::string toString();
 

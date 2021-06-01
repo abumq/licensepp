@@ -19,6 +19,12 @@ extern "C"
 #ifdef __cplusplus
 extern "C"
 #endif
+    int
+    license_load(void* license, const char* license_contents_base64);
+
+#ifdef __cplusplus
+extern "C"
+#endif
     void
     license_set_licensee(void* license, const char* licensee);
 

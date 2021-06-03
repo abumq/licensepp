@@ -43,8 +43,8 @@ IssuingAuthority::IssuingAuthority(const std::string& id,
                                    bool active) :
     m_id(id),
     m_name(name),
-    m_privateKey(privateKey),
-    m_publicKey(publicKey),
+    m_privateKey(Base64::decode(privateKey)),
+    m_publicKey(Base64::decode(publicKey)),
     m_active(active),
     m_maxValidity(maxValidity)
 {

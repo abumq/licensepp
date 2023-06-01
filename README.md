@@ -6,11 +6,7 @@
 
 License++ is software licensing library that provides an abstract way to secure your software usage.
 
-[![Build Status](https://img.shields.io/travis/amrayn/licensepp/master.svg?)](https://travis-ci.org/amrayn/licensepp/branches)
-[![Build Status](https://img.shields.io/travis/amrayn/licensepp/develop.svg?)](https://travis-ci.org/amrayn/licensepp/branches)
 [![Version](https://img.shields.io/github/release/amrayn/licensepp.svg)](https://github.com/amrayn/licensepp/releases/latest)
-
-[![Donate](https://amrayn.github.io/donate.png?v2)](https://amrayn.com/donate)
 
 ## Features
 
@@ -152,11 +148,10 @@ Licenses generated using License++ are base64 encoded JSON. They look like as fo
 
 ## License
 ```
-Copyright (c) 2018-present Amrayn Web Services
+Copyright (c) 2018-present Amrayn.com
 
 https://github.com/amrayn
 https://amrayn.com
-https://muflihun.com
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

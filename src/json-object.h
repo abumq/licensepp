@@ -80,12 +80,6 @@ public:
         return get<bool>(key, defaultValue);
     }
 
-    inline const char* getCString(const std::string& key,
-                                  const char* defaultValue = "") const
-    {
-        return getString(key, defaultValue).c_str();
-    }
-
     inline bool hasKey(const std::string& key) const
     {
          return m_root.count(key) > 0;

@@ -2,10 +2,9 @@
 //  license-manager.h
 //  License++ CLI
 //
-//  Copyright © 2018-present Amrayn Web Services
-//  https://amrayn.com
+//  Copyright © 2018-present @abumq (Majid Q.)
 //
-//  See https://github.com/amrayn/licensepp/blob/master/LICENSE 
+//  See https://github.com/abumq/licensepp/blob/master/LICENSE
 //
 
 #ifndef LicenseManagerKeyRegister_h

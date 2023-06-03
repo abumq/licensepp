@@ -2,10 +2,9 @@
 //  license-manager-for-test.h
 //  License++ Tests
 //
-//  Copyright © 2018-present Amrayn Web Services
-//  https://amrayn.com
+//  Copyright © 2018-present @abumq (Majid Q.)
 //
-//  See https://github.com/amrayn/licensepp/blob/master/LICENSE 
+//  See https://github.com/abumq/licensepp/blob/master/LICENSE
 //
 
 #ifndef LICENSE_MANAGER_FOR_TEST_H

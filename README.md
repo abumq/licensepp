@@ -6,7 +6,7 @@
 
 License++ is software licensing library that provides an abstract way to secure your software usage.
 
-[![Version](https://img.shields.io/github/release/amrayn/licensepp.svg)](https://github.com/amrayn/licensepp/releases/latest)
+[![Version](https://img.shields.io/github/release/abumq/licensepp.svg)](https://github.com/abumq/licensepp/releases/latest)
 
 ## Features
 
@@ -21,16 +21,16 @@ License++ is software licensing library that provides an abstract way to secure 
 ### Dependencies
 
   * C++11
-  * [Crypto++](https://www.cryptopp.com/) v5.6.5+ [with Pem Pack](https://amrayn.github.io/downloads/pem_pack.zip)
+  * [Crypto++](https://www.cryptopp.com/) v5.6.5+ [with Pem Pack](https://abumq.github.io/downloads/pem_pack.zip)
   * [cmake](https://cmake.org/) v2.8.12+
 
 ### Installation
- * [Download](https://github.com/amrayn/licensepp/archive/master.zip) or [clone](git@github.com:amrayn/licensepp.git) the repository
+ * [Download](https://github.com/abumq/licensepp/archive/master.zip) or [clone](git@github.com:abumq/licensepp.git) the repository
  * Install Crypto++
      ```
-     git clone https://github.com/amrayn/licensepp
+     git clone https://github.com/abumq/licensepp
      git clone https://github.com/weidai11/cryptopp.git
-     git clone https://github.com/amraynweb/cryptopp-pem.git
+     git clone https://github.com/noloader/cryptopp-pem.git
      cp cryptopp-pem/* cryptopp/
      cd cryptopp
      make
@@ -74,7 +74,7 @@ License++ is software licensing library that provides an abstract way to secure 
  )
  ```
 
-You can use [ripe](https://github.com/amrayn/ripe) command to generate new authority key or you can use openssl CLI tool to do so
+You can use [ripe](https://github.com/abumq/ripe) command to generate new authority key or you can use openssl CLI tool to do so
 ```
 ripe -g --rsa --length 2048 [--secret <secret>]
 ```
@@ -90,7 +90,7 @@ Which is base64-encoded keypair seperated with `:`
 ## Generate New Signature Key
 License++ signature key is what's used to sign the licensee's signature. This is to protect the information with AES-CBC-128. Signature key is defined in 128-bit array in [key register](/cli/licensing/license-manager-key-register.cc) (`LICENSE_MANAGER_SIGNATURE_KEY`)
 
-You can use [ripe](https://github.com/amrayn/ripe) to generate new key
+You can use [ripe](https://github.com/abumq/ripe) to generate new key
 
 ```
 ripe -g --aes --length 128
@@ -148,10 +148,7 @@ Licenses generated using License++ are base64 encoded JSON. They look like as fo
 
 ## License
 ```
-Copyright (c) 2018-present Amrayn.com
-
-https://github.com/amrayn
-https://amrayn.com
+Copyright (c) 2018-present @abumq (Majid Q.)
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -166,4 +163,4 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ```
 
- [banner]: https://github.com/amrayn/licensepp/raw/master/licensepp.png
+ [banner]: https://github.com/abumq/licensepp/raw/master/licensepp.png

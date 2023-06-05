@@ -1,12 +1,19 @@
 //
-//  Ripe.cc
+//  Ripe
 //
-//  Copyright © 2017-present Amrayn Web Services
-//  https://amrayn.com
-//  https://muflihun.com
-//  https://github.com/amrayn
+//  Copyright 2017-present @abumq (Majid Q.)
 //
-//  [This is custom version of Ripe for License++]
+//  Licensed under the Apache License, Version 2.0 (the "License");
+//  you may not use this file except in compliance with the License.
+//  You may obtain a copy of the License at
+//
+//    http://www.apache.org/licenses/LICENSE-2.0
+//
+//  Unless required by applicable law or agreed to in writing, software
+//  distributed under the License is distributed on an "AS IS" BASIS,
+//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//  See the License for the specific language governing permissions and
+//  limitations under the License.
 //
 
 #include <cerrno>
@@ -25,8 +32,12 @@
 #include <cryptopp/hex.h>
 #include <cryptopp/pem.h>
 #include <cryptopp/rsa.h>
+#include <cryptopp/sha.h>
+#include <cryptopp/filters.h>
 
-#include "src/external/Ripe.h"
+#include <zlib.h>
+
+#include "../include/Ripe.h"
 
 #define RIPE_UNUSED(x) (void)x
 
@@ -383,6 +394,129 @@ std::string Ripe::decryptAES(std::string& data, const std::string& hexKey, std::
         data = Ripe::hexToString(data);
     }
     return Ripe::decryptAES(data, reinterpret_cast<const RipeByte*>(Ripe::hexToString(hexKey).c_str()), hexKey.size() / 2, ivHex);
+}
+
+bool Ripe::compressFile(const std::string& gzFilename, const std::string& inputFile)
+{
+    gzFile out = gzopen(gzFilename.c_str(), "wb");
+    if (!out) {
+        throw std::runtime_error(
+                    std::string("Unable to open file for writing [" + gzFilename + "] " + std::strerror(errno)).data()
+                    );
+        return false;
+     }
+    char buff[BUFSIZ];
+    std::FILE* in = std::fopen(inputFile.c_str(), "rb");
+    std::size_t nRead = 0;
+    while((nRead = std::fread(buff, sizeof(char), BUFSIZ, in)) > 0) {
+        int RipeBytes_written = gzwrite(out, buff, nRead);
+        if (RipeBytes_written == 0) {
+           int err_no = 0;
+           throw std::runtime_error(
+                       std::string("Error during compression " + std::string(gzerror(out, &err_no))).data()
+                       );
+           gzclose(out);
+           return false;
+        }
+    }
+    gzclose(out);
+    std::fclose(in);
+    return true;
+}
+
+std::string Ripe::compressString(const std::string& str)
+{
+    int compressionlevel = Z_BEST_COMPRESSION;
+    z_stream zs;
+    memset(&zs, 0, sizeof(zs));
+
+    if (deflateInit(&zs, compressionlevel) != Z_OK) {
+        throw std::runtime_error("Unable to initialize zlib deflate");
+    }
+
+    zs.next_in = reinterpret_cast<Bytef*>(const_cast<char*>(str.data()));
+    zs.avail_in = str.size();
+
+    int ret;
+    char outbuffer[ZLIB_BUFFER_SIZE];
+    std::string outstring;
+
+    // retrieve the compressed RipeBytes blockwise
+    do {
+        zs.next_out = reinterpret_cast<Bytef*>(outbuffer);
+        zs.avail_out = sizeof(outbuffer);
+
+        ret = deflate(&zs, Z_FINISH);
+
+        if (outstring.size() < zs.total_out) {
+            outstring.append(outbuffer, zs.total_out - outstring.size());
+        }
+    } while (ret == Z_OK);
+
+    deflateEnd(&zs);
+
+    if (ret != Z_STREAM_END) {
+        std::ostringstream oss;
+        oss << "Exception during zlib compression: (" << ret << ") " << (zs.msg != NULL ? zs.msg : "no msg");
+        throw std::runtime_error(oss.str());
+    }
+
+    return outstring;
+}
+
+std::string Ripe::decompressString(const std::string& str)
+{
+    z_stream zs;
+    memset(&zs, 0, sizeof(zs));
+
+    if (inflateInit(&zs) != Z_OK) {
+        throw std::runtime_error("Unable to initialize zlib inflate");
+    }
+
+    zs.next_in = reinterpret_cast<Bytef*>(const_cast<char*>(str.data()));
+    zs.avail_in = str.size();
+
+    int ret;
+    char outbuffer[ZLIB_BUFFER_SIZE];
+    std::string outstring;
+
+    do {
+        zs.next_out = reinterpret_cast<Bytef*>(outbuffer);
+        zs.avail_out = sizeof(outbuffer);
+
+        ret = inflate(&zs, 0);
+
+        if (outstring.size() < zs.total_out) {
+            outstring.append(outbuffer, zs.total_out - outstring.size());
+        }
+
+    } while (ret == Z_OK);
+
+    inflateEnd(&zs);
+
+    if (ret != Z_STREAM_END) {
+        std::ostringstream oss;
+        oss << "Exception during zlib decompression: (" << ret << ") " << (zs.msg != NULL ? zs.msg : "no msg");
+        throw std::runtime_error(oss.str());
+    }
+
+    return outstring;
+}
+
+std::string Ripe::sha256Hash(const std::string& data)
+{
+    std::string digest;
+    SHA256 hasher;
+    StringSource ss(data, true, new HashFilter(hasher, new HexEncoder(new StringSink(digest))));
+    return digest;
+}
+
+std::string Ripe::sha512Hash(const std::string& data)
+{
+    std::string digest;
+    CryptoPP::SHA512 hasher;
+    StringSource ss(data, true, new HashFilter(hasher, new HexEncoder(new StringSink(digest))));
+    return digest;
 }
 
 std::string Ripe::prepareData(const std::string& data, const std::string& hexKey, const char* clientId, const std::string& ivec)

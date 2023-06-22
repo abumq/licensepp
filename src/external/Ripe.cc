@@ -37,7 +37,7 @@
 
 #include <zlib.h>
 
-#include "../include/Ripe.h"
+#include "Ripe.h"
 
 #define RIPE_UNUSED(x) (void)x
 

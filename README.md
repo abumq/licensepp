@@ -8,6 +8,9 @@ License++ is software licensing library that provides an abstract way to secure 
 
 [![Version](https://img.shields.io/github/release/abumq/licensepp.svg)](https://github.com/abumq/licensepp/releases/latest)
 
+## Abstract
+I created a concept of digital software licence and implemented it under this project. The digital licence would be issued by an issuing authority with a digital signature. The whole process is protected by public-key cryptography signing scheme. This guarantees that the generation of new licenses is restricted, and any attempts to tamper with an issued license are prevented, similar to how we are issued with driver's licence, or better.
+
 ## Features
 
  * RSA-Based signing to prevent alteration

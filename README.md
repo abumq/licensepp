@@ -146,6 +146,7 @@ This will now go in to the key register.
 ## CLI
 CLI tool provide ability to generate new licenses and validate existing license. Each CLI tool's version is linked directly with your version of key register.
 
+[See dedicated README](/cli)
 
 ### Issue New License
 ```

@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-    <a href="https://github.com/amrayn/craftx">
+    <a href="https://github.com/abumq/licensepp">
       <img width="400px" src="https://github.com/abumq/licensepp/raw/master/licensepp.png?" />
     </a>
     <p align="center">Software licensing using digital signatures 🪪</p>

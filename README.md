@@ -2,11 +2,23 @@
   ﷽
 </p>
 
-![banner]
+<p align="center">
+    <a href="https://github.com/amrayn/craftx">
+      <img width="400px" src="https://github.com/abumq/licensepp/raw/master/licensepp.png?" />
+    </a>
+    <p align="center">Software licensing using digital signatures 🪪</p>
+</p>
 
-License++ is software licensing library that provides an abstract way to secure your software usage.
+<p align="center">
+  <a aria-label="Version" href="https://github.com/abumq/licensepp/releases/latest">
+    <img alt="" src="https://img.shields.io/github/release/abumq/licensepp.svg?style=for-the-badge&labelColor=000000">
+  </a>
+  <a aria-label="License" href="https://github.com/abumq/licensepp/blob/master/LICENSE">
+    <img alt="Apache 2.0" src="https://img.shields.io/badge/License-Apache%202.0-blue.svg?style=for-the-badge&labelColor=220000">
+  </a>
+</p>
 
-[![Version](https://img.shields.io/github/release/abumq/licensepp.svg)](https://github.com/abumq/licensepp/releases/latest)
+License++ is a cross platform software licensing library that uses digital signatures to secure use of your application and its licensing.
 
 ## Abstract
 I created a concept of digital software licence and implemented it under this project. The digital licence would be issued by an issuing authority with a digital signature. The whole process is protected by public-key cryptography signing scheme. This guarantees that the generation of new licenses is restricted, and any attempts to tamper with an issued license are prevented, similar to how we are issued with driver's licence, or better.
@@ -23,13 +35,16 @@ I created a concept of digital software licence and implemented it under this pr
 
 ### Dependencies
 
-  * C++11 (C++14 if building with test since latest Google C++ Testing Library requires C++14)
+  * C++11 (C++14 if you are also building tests, since latest Google C++ Testing Library requires C++14)
   * [Crypto++](https://www.cryptopp.com/) v5.6.5+ [with Pem Pack](https://abumq.github.io/downloads/pem_pack.zip)
   * [cmake](https://cmake.org/) v2.8.12+
   * [Ripe](https://github.com/abumq/ripe)
 
 ### Installation
- * [Download](https://github.com/abumq/licensepp/archive/master.zip) or [clone](git@github.com:abumq/licensepp.git) the repository
+ * Clone the repo
+    ```
+     git clone git@github.com:abumq/licensepp.git
+    ```
  * Install Crypto++
      ```
       wget https://raw.githubusercontent.com/abumq/abumq.github.io/master/downloads/cryptocpp.tar.gz
@@ -41,6 +56,15 @@ I created a concept of digital software licence and implemented it under this pr
       make
       sudo make install
      ```
+ * Install Ripe (if this fails, refer to full [build instructions](https://github.com/abumq/ripe/tree/master#build) on the github)
+    ```
+      git clone git@github.com:abumq/ripe.git
+      mkdir build
+      cd build
+      cmake ..
+      make
+      sudo make install
+    ```
  * Use CMake to build the project
      ```
      cd licensepp

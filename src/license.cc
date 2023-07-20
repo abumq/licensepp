@@ -36,7 +36,7 @@ std::string License::toString()
     return Base64::encode(raw());
 }
 
-std::string License::raw() const
+std::string License::raw(bool full) const
 {
     JsonObject::Json j;
     j["licensee"] = m_licensee;
@@ -46,7 +46,11 @@ std::string License::raw() const
     j["issue_date"] = m_issueDate;
     j["expiry_date"] = m_expiryDate;
     j["issuing_authority"] = m_issuingAuthorityId;
-    j["authority_signature"] = m_authoritySignature;
+    
+    if (full) {
+        j["authority_signature"] = m_authoritySignature;
+    }
+
     if (!m_additionalPayload.empty()) {
         j["additional_payload"] = m_additionalPayload;
     }

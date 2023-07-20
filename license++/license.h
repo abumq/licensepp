@@ -96,8 +96,9 @@ public:
 
     ///
     /// \brief Returns raw format of license
+    /// \param full Returns all fields instead of essentials-only
     ///
-    std::string raw() const;
+    std::string raw(bool full = false) const;
 
     ///
     /// \brief Returns expiry date in <pre>%d %b, %Y %H:%m UTC</pre> format

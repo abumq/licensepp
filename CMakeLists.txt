@@ -58,6 +58,7 @@ set(LICENSEPP_SOURCE_FILES
     license++/issuing-authority.h
     license++/base-license-manager.h
     license++/c-bindings.h
+
     src/utils.cc
     src/json-object.cc
     src/crypto/aes.cc
@@ -74,7 +75,15 @@ add_library (licensepp-lib ${LICENSEPP_SOURCE_FILES})
 set_target_properties (licensepp-lib PROPERTIES
     VERSION ${LICENSEPP_SOVERSION}
 )
-target_include_directories (licensepp-lib PUBLIC $<INSTALL_INTERFACE:include>)
+
+# ensure project headers are included before global include (notice BEFORE in line below)
+target_include_directories (licensepp-lib BEFORE PUBLIC
+    $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/>
+)
+
+target_include_directories (licensepp-lib PUBLIC
+    $<INSTALL_INTERFACE:include>
+)
 
 target_link_libraries (licensepp-lib
     ${CRYPTOPP_LIBRARIES}

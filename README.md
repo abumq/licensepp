@@ -159,6 +159,13 @@ CLI tool provide ability to generate new licenses and validate existing license.
 ./license-manager --validate license.file [--signature <signature>]
 ```
 
+The validate checks for the following things:
+
+ - The license was issued by authorised license issuing authority
+ - License has been tampered with
+ - The license is still valid
+ - In case of signed license, the signature is valid
+
 ## License Format
 Licenses generated using License++ are base64 encoded JSON. They look like as follows:
 

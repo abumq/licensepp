@@ -38,3 +38,19 @@ Here `eyJhdXRob3JpdHlfc2ln ... XRpemVuIn0=` is the signed license.
 You can give this license to the user. The user can then use this license to access your application.
 
 This is very basic license, you can even have licensee signature or passphrase to access the license (see usage above)
+
+### Validate
+You can use the CLI to validate the license
+
+```
+./license-manager --validate sample.license
+```
+
+The expected output is
+
+```
+Licensed to john-citizen
+Subscription is active until 17 Dec, 2023 03:23 UTC
+```
+
+See [Validate License](https://github.com/abumq/licensepp/tree/master#validate-license) in README

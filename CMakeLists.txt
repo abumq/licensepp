@@ -52,12 +52,12 @@ find_package(Ripe REQUIRED)
 
 include_directories (${EXTERNAL_INCLUDE_DIR})
 
+# Get a list of all header files in the 'license++' directory
+file(GLOB HEADER_FILES "include/license++/*.h")
+file(GLOB CC_FILES "src/*.cc")
+
 set(LICENSEPP_SOURCE_FILES
-    license++/license-exception.h
-    license++/license.h
-    license++/issuing-authority.h
-    license++/base-license-manager.h
-    license++/c-bindings.h
+    ${HEADER_FILES}
 
     src/utils.cc
     src/json-object.cc
@@ -78,7 +78,7 @@ set_target_properties (licensepp-lib PROPERTIES
 
 # ensure project headers are included before global include (notice BEFORE in line below)
 target_include_directories (licensepp-lib BEFORE PUBLIC
-    $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/>
+    $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/include>
 )
 
 target_include_directories (licensepp-lib PUBLIC
@@ -92,11 +92,8 @@ target_link_libraries (licensepp-lib
 
 set_target_properties (licensepp-lib PROPERTIES OUTPUT_NAME "licensepp")
 install (TARGETS licensepp-lib EXPORT licensepp-config DESTINATION lib)
-install (FILES license++/base-license-manager.h DESTINATION "include/license++")
-install (FILES license++/issuing-authority.h DESTINATION "include/license++")
-install (FILES license++/license.h DESTINATION "include/license++")
-install (FILES license++/license-exception.h DESTINATION "include/license++")
-install (FILES license++/c-bindings.h DESTINATION "include/license++")
+# Install the header files to the 'include/license++' directory
+install(FILES ${HEADER_FILES} DESTINATION "include/license++")
 install (EXPORT licensepp-config DESTINATION share/licensepp/cmake)
 export (TARGETS licensepp-lib FILE licensepp-config.cmake)
 

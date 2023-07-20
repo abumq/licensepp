@@ -18,12 +18,12 @@ using namespace licensepp;
 class LicenseKeysRegister
 {
 public:
-    static const unsigned char LICENSE_MANAGER_SIGNATURE_KEY[];
+    static const std::array<unsigned char, 16> LICENSE_MANAGER_SIGNATURE_KEY;
 
     static const std::vector<IssuingAuthority> LICENSE_ISSUING_AUTHORITIES;
 };
 
-const unsigned char LicenseKeysRegister::LICENSE_MANAGER_SIGNATURE_KEY[] =
+const std::array<unsigned char, 16> LicenseKeysRegister::LICENSE_MANAGER_SIGNATURE_KEY =
 {
     0x5B, 0x6A, 0xF5, 0x93, 0xED, 0xAB, 0xB3, 0x10, 0xF5, 0xBE, 0x00, 0xE6, 0x4F, 0x1B, 0x70, 0xC8
 };

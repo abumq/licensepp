@@ -23,21 +23,23 @@ I created a concept of digital software licence and implemented it under this pr
 
 ### Dependencies
 
-  * C++11
+  * C++11 (C++14 if building with test since latest Google C++ Testing Library requires C++14)
   * [Crypto++](https://www.cryptopp.com/) v5.6.5+ [with Pem Pack](https://abumq.github.io/downloads/pem_pack.zip)
   * [cmake](https://cmake.org/) v2.8.12+
+  * [Ripe](https://github.com/abumq/ripe)
 
 ### Installation
  * [Download](https://github.com/abumq/licensepp/archive/master.zip) or [clone](git@github.com:abumq/licensepp.git) the repository
  * Install Crypto++
      ```
-     git clone https://github.com/abumq/licensepp
-     git clone https://github.com/weidai11/cryptopp.git
-     git clone https://github.com/noloader/cryptopp-pem.git
-     cp cryptopp-pem/* cryptopp/
-     cd cryptopp
-     make
-     sudo make install
+      wget https://raw.githubusercontent.com/abumq/abumq.github.io/master/downloads/cryptocpp.tar.gz
+      tar xf cryptocpp.tar.gz
+      cd cryptopp-CRYPTOPP_5_6_5
+      wget https://raw.githubusercontent.com/abumq/abumq.github.io/master/downloads/pem_pack.zip
+      unzip pem_pack.zip
+      cmake .
+      make
+      sudo make install
      ```
  * Use CMake to build the project
      ```
@@ -48,7 +50,7 @@ I created a concept of digital software licence and implemented it under this pr
      make
      sudo make install
 
-     ## build with test
+     ## build with test (make sure you have Google C++ Testing Library)
      cmake -Dtest=ON ..
      make
      sudo make install

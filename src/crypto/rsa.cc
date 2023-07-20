@@ -7,7 +7,8 @@
 //  See https://github.com/abumq/licensepp/blob/master/LICENSE
 //
 
-#include "src/external/Ripe.h"
+#include <Ripe.h>
+
 #include "src/crypto/rsa.h"
 #include "src/crypto/base64.h"
 

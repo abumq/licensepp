@@ -1,5 +1,11 @@
 # Change Log
 
+## [1.1.0] - 20-07-2023
+- Updated Crypto++ dep to 8.8.0
+- Change C++ dependency to C++14
+- Using `std::array` instead of raw array
+- C bindings (special shout out to [`spotzai`](https://github.com/spotzai) for PR)
+
 ## [1.0.6] - 24-11-2018
 - Updated license
 

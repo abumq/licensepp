@@ -7,8 +7,8 @@
 //  See https://github.com/abumq/licensepp/blob/master/LICENSE
 //
 
-#ifndef LicenseException_h
-#define LicenseException_h
+#ifndef LICENSEPP_LicenseException_h
+#define LICENSEPP_LicenseException_h
 
 #include <stdexcept>
 
@@ -30,4 +30,4 @@ public:
 };
 
 }
-#endif /* LicenseException_h */
+#endif /* LICENSEPP_LicenseException_h */

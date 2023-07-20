@@ -4,21 +4,19 @@
 //  TestX 1.0.1
 //  Single header, header only helper for creating test data
 //
-//  Copyright (c) 2017 Amrayn Web Services
+//  Copyright (c) 2017 @abumq (Majid Q.)
 //
 //  This library is released under the MIT Licence.
 //
-//  https://github.com/amrayn/testx
-//  https://amrayn.com
-//  http://muflihun.com
+//  https://github.com/abumq/testx
 //
-#ifndef MUFLIHUN_TEST_X_H
-#define MUFLIHUN_TEST_X_H
+#ifndef ABUMQ_TEST_X_H
+#define ABUMQ_TEST_X_H
 
 #include <tuple>
 #include <vector>
 
-namespace muflihun {
+namespace abumq {
 namespace testx {
 
 template <typename... T>
@@ -30,6 +28,6 @@ std::tuple<T...> TestCase(T... f) {
 }
 
 } // namespace testx
-} // namespace muflihun
+} // namespace abumq
 
-#endif // MUFLIHUN_TEST_X_H
+#endif // ABUMQ_TEST_X_H

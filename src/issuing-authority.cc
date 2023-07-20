@@ -115,7 +115,7 @@ License IssuingAuthority::issue(const std::string& licensee,
     }
 
     if (!validate(&license, masterKey, true, licenseeSignature)) {
-        throw LicenseException("Failed to validate new license. Please report it @https://github.com/amrayn/licensepp");
+        throw LicenseException("Failed to validate new license. Please report it @https://github.com/abumq/licensepp");
     }
     return license;
 }

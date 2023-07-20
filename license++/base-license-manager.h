@@ -7,8 +7,8 @@
 //  See https://github.com/abumq/licensepp/blob/master/LICENSE 
 //
 
-#ifndef BaseLicenseManager_h
-#define BaseLicenseManager_h
+#ifndef LICENSEPP_BaseLicenseManager_h
+#define LICENSEPP_BaseLicenseManager_h
 
 #include <iostream>
 #include <string>
@@ -27,7 +27,7 @@ namespace licensepp {
 /// key register.
 ///
 /// The key register must contains two static members.
-///  1. static const unsigned char LICENSE_MANAGER_SIGNATURE_KEY[];
+///  1. static const std:array<unsigned char, 16> LICENSE_MANAGER_SIGNATURE_KEY;
 ///  2. static const std::vector<licensepp::IssuingAuthority> LICENSE_ISSUING_AUTHORITIES;
 ///
 /// Definitions must be provided as well.
@@ -37,12 +37,12 @@ namespace licensepp {
 /// class LicenseKeysRegister
 /// {
 /// public:
-///    static const unsigned char LICENSE_MANAGER_SIGNATURE_KEY[];
+///    static const std::array<unsigned char, 16> LICENSE_MANAGER_SIGNATURE_KEY;
 ///
 ///    static const std::vector<IssuingAuthority> LICENSE_ISSUING_AUTHORITIES;
 /// };
 ///
-/// const unsigned char LicenseKeysRegister::LICENSE_MANAGER_SIGNATURE_KEY[] =
+/// const std::array<unsigned char, 16> LicenseKeysRegister::LICENSE_MANAGER_SIGNATURE_KEY =
 /// {
 ///    0x27, 0xD4, 0x91, 0x55, 0xE6, 0x6D, 0xC3, 0x11,
 ///    0x8D, 0xC0, 0x52, 0x0B, 0x2C, 0x9F, 0x84, 0xF3,
@@ -65,7 +65,7 @@ namespace licensepp {
 /// };
 /// </pre>
 ///
-/// \see https://github.com/amrayn/licensepp/blob/master/sample/
+/// \see https://github.com/abumq/licensepp/blob/master/sample/
 ///
 template <class LicenseKeysRegister>
 class BaseLicenseManager
@@ -145,12 +145,11 @@ private:
     {
         const std::string b16list = "0123456789ABCDEF";
         std::stringstream ss;
-        for (auto i = 0; i < 16; ++i) {
-            ss << b16list[LicenseKeysRegister::LICENSE_MANAGER_SIGNATURE_KEY[i] >> 4]
-                    << b16list[LicenseKeysRegister::LICENSE_MANAGER_SIGNATURE_KEY[i] & 0xf];
+        for (const auto c : LicenseKeysRegister::LICENSE_MANAGER_SIGNATURE_KEY) {
+            ss << b16list[c >> 4] << b16list[c & 0xf];
         }
         return ss.str();
     }
 };
 }
-#endif // BaseLicenseManager_h
+#endif // LICENSEPP_BaseLicenseManager_h

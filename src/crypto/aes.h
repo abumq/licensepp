@@ -7,8 +7,8 @@
 //  See https://github.com/abumq/licensepp/blob/master/LICENSE
 //
 
-#ifndef AES_h
-#define AES_h
+#ifndef LICENSEPP_AES_h
+#define LICENSEPP_AES_h
 
 #include <string>
 
@@ -43,4 +43,4 @@ public:
 };
 }
 
-#endif /* AES_h */
+#endif /* LICENSEPP_AES_h */

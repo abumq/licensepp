@@ -8,10 +8,9 @@ License++ is a cross platform software licensing library which allows you to imp
 ## Licence
 
 ```
-Copyright (c) 2018-present Amrayn Web Services
+Copyright (c) 2018-present @abumq (Majid Q.)
 
-https://github.com/amrayn/
-https://muflihun.com
+https://github.com/abumq/
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

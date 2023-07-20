@@ -3,7 +3,7 @@
 //
 // Copyright © 2018-present @abumq (Majid Q.)
 //
-// See https://github.com/amrayn/licensepp/blob/master/LICENSE
+// See https://github.com/abumq/licensepp/blob/master/LICENSE
 //
 
 #include <cstring>
@@ -18,7 +18,7 @@ void displayUsage() {
 }
 
 void displayVersion() {
-    std::cout << "License Manager v1.0.0" << std::endl;
+    std::cout << "License Manager v1.1.0" << std::endl;
 }
 
 int main(int argc, char* argv[])
@@ -91,7 +91,7 @@ int main(int argc, char* argv[])
             std::cout << "Invalid issuing authority." << std::endl;
             return 1;
         }
-        licensepp::License license = licenseManager.issue(licensee, period, issuingAuthority, secret, signature,additionalPayload);
+        licensepp::License license = licenseManager.issue(licensee, period, issuingAuthority, secret, signature, additionalPayload);
         std::cout << license.toString() << std::endl;
         std::cout << "Licensed to " << license.licensee() << std::endl;
         std::cout << "Subscription is active until " << license.formattedExpiry() << std::endl << std::endl;

@@ -7,8 +7,8 @@
 //  See https://github.com/abumq/licensepp/blob/master/LICENSE
 //
 
-#ifndef RSA_h
-#define RSA_h
+#ifndef LICENSEPP_RSA_h
+#define LICENSEPP_RSA_h
 
 #include <string>
 
@@ -51,4 +51,4 @@ public:
 };
 }
 
-#endif /* RSA_h */
+#endif /* LICENSEPP_RSA_h */

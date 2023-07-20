@@ -7,8 +7,8 @@
 //  See https://github.com/abumq/licensepp/blob/master/LICENSE
 //
 
-#ifndef Utils_h
-#define Utils_h
+#ifndef LICENSEPP_Utils_h
+#define LICENSEPP_Utils_h
 
 #if (defined(_WIN32) || defined(_WIN64))
 #  define LICENSEPP_OS_WINDOWS 1
@@ -94,4 +94,4 @@ public:
     static char* parseFormat(char* buf, std::size_t bufSz, const char* format, const struct tm* tInfo, std::size_t msec);
 };
 }
-#endif /* Utils_h */
+#endif /* LICENSEPP_Utils_h */

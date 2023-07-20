@@ -7,8 +7,8 @@
 //  See https://github.com/abumq/licensepp/blob/master/LICENSE
 //
 
-#ifndef IssuingAuthority_h
-#define IssuingAuthority_h
+#ifndef LICENSEPP_IssuingAuthority_h
+#define LICENSEPP_IssuingAuthority_h
 
 #include <string>
 #include <license++/license.h>
@@ -28,12 +28,12 @@ public:
     IssuingAuthority(const IssuingAuthority&);
     IssuingAuthority& operator=(IssuingAuthority);
 
-    inline std::string id() const
+    inline const std::string& id() const
     {
         return m_id;
     }
 
-    inline std::string name() const
+    inline const std::string& name() const
     {
         return m_name;
     }
@@ -87,4 +87,4 @@ private:
 };
 }
 
-#endif /* IssuingAuthority_h */
+#endif /* LICENSEPP_IssuingAuthority_h */

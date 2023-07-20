@@ -33,19 +33,7 @@ std::string License::formattedExpiry() const
 
 std::string License::toString()
 {
-    JsonObject::Json j;
-    j["licensee"] = m_licensee;
-    if (!m_licenseeSignature.empty()) {
-        j["licensee_signature"] = m_licenseeSignature;
-    }
-    j["issue_date"] = m_issueDate;
-    j["expiry_date"] = m_expiryDate;
-    j["issuing_authority"] = m_issuingAuthorityId;
-    j["authority_signature"] = m_authoritySignature;
-    if(!m_additionalPayload.empty()) {
-        j["additional_payload"] = m_additionalPayload;
-    }
-    return Base64::encode(j.dump());
+    return Base64::encode(raw());
 }
 
 std::string License::raw() const
@@ -58,7 +46,8 @@ std::string License::raw() const
     j["issue_date"] = m_issueDate;
     j["expiry_date"] = m_expiryDate;
     j["issuing_authority"] = m_issuingAuthorityId;
-    if(!m_additionalPayload.empty()) {
+    j["authority_signature"] = m_authoritySignature;
+    if (!m_additionalPayload.empty()) {
         j["additional_payload"] = m_additionalPayload;
     }
     return j.dump();

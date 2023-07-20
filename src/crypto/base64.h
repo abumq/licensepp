@@ -7,8 +7,8 @@
 //  See https://github.com/abumq/licensepp/blob/master/LICENSE
 //
 
-#ifndef Base64_h
-#define Base64_h
+#ifndef LICENSEPP_Base64_h
+#define LICENSEPP_Base64_h
 
 #include <string>
 
@@ -25,4 +25,4 @@ public:
 };
 }
 
-#endif /* Base64_h */
+#endif /* LICENSEPP_Base64_h */

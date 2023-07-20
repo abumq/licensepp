@@ -10,6 +10,7 @@
 #ifndef LicenseManagerKeyRegister_h
 #define LicenseManagerKeyRegister_h
 
+#include <array>
 #include <string>
 #include <vector>
 #include <license++/issuing-authority.h>
@@ -17,7 +18,7 @@
 class LicenseManagerKeyRegister
 {
 public:
-    static const unsigned char LICENSE_MANAGER_SIGNATURE_KEY[];
+    static const std::array<unsigned char, 16> LICENSE_MANAGER_SIGNATURE_KEY;
 
     static const std::vector<licensepp::IssuingAuthority> LICENSE_ISSUING_AUTHORITIES;
 };

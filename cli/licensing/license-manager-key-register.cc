@@ -2,7 +2,7 @@
 
 using namespace licensepp;
 
-const unsigned char LicenseManagerKeyRegister::LICENSE_MANAGER_SIGNATURE_KEY[16] = {
+const std::array<unsigned char, 16> LicenseManagerKeyRegister::LICENSE_MANAGER_SIGNATURE_KEY = {
     0x5B, 0x6A, 0xF5, 0x93, 0xED, 0xAB, 0xB3, 0x10, 0xF5, 0xBE, 0x00, 0xE6, 0x4F, 0x1B, 0x70, 0xC8
 };
 

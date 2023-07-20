@@ -3,25 +3,19 @@
 After you build using `make` run:
 
 ```
-./license-manager-sample --license sample.licensepp
-```
-or
-```
-LD_LIBRARY_PATH=/usr/local/lib/ ./license-manager-sample --license sample.licensepp
-```
-or
-```
-LD_LIBRARY_PATH=../build ./license-manager-sample --license sample.licensepp
+┗━━━━ $ ./license-manager-sample --license sample.licensepp
+Licensed to sample-license
+Subscription is active until 07 Jan, 2028 12:23 UTC
 ```
 
 ```
-./license-manager-sample --license sample-with-signature.licensepp --signature sample-signature
+┗━━━━ $ ./license-manager-sample --license sample-with-signature.licensepp --signature sample-signature
+Licensed to sample-license
+Subscription is active until 07 Jan, 2028 12:24 UTC
 ```
-or
+
 ```
-LD_LIBRARY_PATH=/usr/local/lib/ ./license-manager-sample --license sample-with-signature.licensepp --signature sample-signature
+┗━━━━ $ ./license-manager-sample --license sample-with-signature.licensepp
+License is not valid
 ```
-or
-```
-LD_LIBRARY_PATH=../build ./license-manager-sample --license sample-with-signature.licensepp --signature sample-signature
-```
+

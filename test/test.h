@@ -15,6 +15,6 @@
 
 #define PARAM(v) std::get<v>(item)
 
-using namespace muflihun::testx;
+using namespace abumq::testx;
 
 #endif // TEST_H

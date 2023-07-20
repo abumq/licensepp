@@ -7,11 +7,11 @@
 //  See https://github.com/abumq/licensepp/blob/master/LICENSE
 //
 
-#ifndef JsonObject_h
-#define JsonObject_h
+#ifndef LICENSEPP_JsonObject_h
+#define LICENSEPP_JsonObject_h
 
 #include <iostream>
-#include "src/external/json.h"
+#include <json.h>
 
 namespace licensepp {
 
@@ -108,4 +108,4 @@ private:
 };
 }
 
-#endif /* JsonObject_h */
+#endif /* LICENSEPP_JsonObject_h */

@@ -22,7 +22,10 @@ class IssuingAuthority
 {
 public:
     IssuingAuthority(const std::string& id, const std::string& name,
-                     const std::string& keypair, unsigned int maxValidity,
+                     const std::string& keyPair, unsigned int maxValidity,
+                     bool active = true);
+    IssuingAuthority(const std::string& id, const std::string& name,
+                     const std::string& privateKey, const std::string& publicKey,  unsigned int maxValidity,
                      bool active = true);
 
     IssuingAuthority(const IssuingAuthority&);
@@ -81,7 +84,8 @@ public:
 private:
     std::string m_id;
     std::string m_name;
-    std::string m_keypair;
+    std::string m_privateKey;
+    std::string m_publicKey;
     bool m_active;
     unsigned int m_maxValidity;
 };

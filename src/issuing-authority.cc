@@ -22,12 +22,28 @@ using namespace licensepp;
 
 IssuingAuthority::IssuingAuthority(const std::string& id,
                                    const std::string& name,
-                                   const std::string& keypair,
+                                   const std::string& keyPair,
+                                   unsigned int maxValidity,
+                                   bool active) : IssuingAuthority::IssuingAuthority(id, name, "", "", maxValidity) {
+    const auto separatorPos = keyPair.find(":");
+    if (separatorPos == std::string::npos) {
+        throw LicenseException("Issuing authority could not be loaded. Invalid keypair");
+    }
+
+    m_privateKey = Base64::decode(keyPair.substr(0, separatorPos));
+    m_publicKey = Base64::decode(keyPair.substr(separatorPos + 1));
+}
+
+IssuingAuthority::IssuingAuthority(const std::string& id,
+                                   const std::string& name,
+                                   const std::string& privateKey,
+                                   const std::string& publicKey,
                                    unsigned int maxValidity,
                                    bool active) :
     m_id(id),
     m_name(name),
-    m_keypair(keypair),
+    m_privateKey(Base64::decode(privateKey)),
+    m_publicKey(Base64::decode(publicKey)),
     m_active(active),
     m_maxValidity(maxValidity)
 {
@@ -41,7 +57,8 @@ IssuingAuthority::IssuingAuthority(const std::string& id,
 IssuingAuthority::IssuingAuthority(const IssuingAuthority& other):
     m_id(other.m_id),
     m_name(other.m_name),
-    m_keypair(other.m_keypair),
+    m_privateKey(other.m_privateKey),
+    m_publicKey(other.m_publicKey),
     m_active(other.m_active),
     m_maxValidity(other.m_maxValidity)
 {
@@ -51,7 +68,8 @@ IssuingAuthority& IssuingAuthority::operator=(IssuingAuthority other)
 {
     std::swap(m_id, other.m_id);
     std::swap(m_name, other.m_name);
-    std::swap(m_keypair, other.m_keypair);
+    std::swap(m_privateKey, other.m_privateKey);
+    std::swap(m_publicKey, other.m_publicKey);
     std::swap(m_active, other.m_active);
     std::swap(m_maxValidity, other.m_maxValidity);
 
@@ -99,13 +117,8 @@ License IssuingAuthority::issue(const std::string& licensee,
             throw LicenseException("Failed to issue the license; " + std::string(e.what()));
         }
     }
-    // issuing authority signs this license
-    auto separatorPos = m_keypair.find(":");
-    if (separatorPos == std::string::npos) {
-        throw LicenseException("Issuing authority could not be loaded. Invalid keypair");
-    }
-
-    const RSA::PrivateKey key = RSA::loadPrivateKey(Base64::decode(m_keypair.substr(0, separatorPos)), secret);
+    
+    const RSA::PrivateKey key = RSA::loadPrivateKey(m_privateKey, secret);
 
     try {
         license.setAuthoritySignature(RSA::sign(license.raw(), key, secret));
@@ -127,14 +140,7 @@ bool IssuingAuthority::validate(const License* license,
 {
     bool result = false;
     try {
-
-        // issuing authority signs this license
-        auto separatorPos = m_keypair.find(":");
-        if (separatorPos == std::string::npos) {
-            throw LicenseException("Issuing authority could not be loaded. Invalid keypair");
-        }
-
-        RSA::PublicKey key = RSA::loadPublicKey(Base64::decode(m_keypair.substr(separatorPos + 1)));
+        RSA::PublicKey key = RSA::loadPublicKey(m_publicKey);
 
         result = RSA::verify(license->raw(), license->authoritySignature(), key);
         if (!result) {

@@ -96,7 +96,6 @@ public:
 
     ///
     /// \brief Returns raw format of license
-    /// \param full Returns all fields instead of essentials-only
     ///
     std::string raw(bool full = false) const;
 

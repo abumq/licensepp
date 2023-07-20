@@ -33,7 +33,7 @@ std::string License::formattedExpiry() const
 
 std::string License::toString()
 {
-    return Base64::encode(raw());
+    return Base64::encode(raw(true));
 }
 
 std::string License::raw(bool full) const
@@ -46,7 +46,7 @@ std::string License::raw(bool full) const
     j["issue_date"] = m_issueDate;
     j["expiry_date"] = m_expiryDate;
     j["issuing_authority"] = m_issuingAuthorityId;
-    
+
     if (full) {
         j["authority_signature"] = m_authoritySignature;
     }

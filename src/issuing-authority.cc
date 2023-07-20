@@ -99,6 +99,7 @@ License IssuingAuthority::issue(const std::string& licensee,
             throw LicenseException("Failed to issue the license; " + std::string(e.what()));
         }
     }
+
     // issuing authority signs this license
     auto separatorPos = m_keypair.find(":");
     if (separatorPos == std::string::npos) {

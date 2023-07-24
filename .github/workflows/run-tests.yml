@@ -12,6 +12,26 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Install GTest
+      run: sudo apt-get install libgtest-dev && cd /usr/src/gtest && sudo cmake CMakeLists.txt && sudo make && sudo cp *.a /usr/lib && sudo ln -s /usr/lib/libgtest.a /usr/local/lib/libgtest.a && sudo ln -s /usr/lib/libgtest_main.a /usr/local/lib/libgtest_main.a
+    - name: Install Crypto++
+      run: |
+        wget https://raw.githubusercontent.com/abumq/abumq.github.io/master/downloads/cryptocpp.tar.gz
+        tar xf cryptocpp.tar.gz
+        cd cryptopp-CRYPTOPP_5_6_5
+        wget https://raw.githubusercontent.com/abumq/abumq.github.io/master/downloads/pem_pack.zip
+        unzip pem_pack.zip
+        cmake .
+        make
+        sudo make install
+    - name: Install Ripe Cryptography
+      run: |
+         git clone git@github.com:abumq/ripe.git
+         mkdir build
+         cd build
+         cmake ..
+         make
+         sudo make install
     - uses: actions/checkout@v3
     - name: Run CMake
       run: |

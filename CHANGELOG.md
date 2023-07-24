@@ -1,7 +1,9 @@
 # Change Log
 
+## [1.2.0] - 24-07-2023
+- Re-added copy constructors with correct initializers (closes #29)
+
 ## [1.1.0] - 20-07-2023
-- Updated Crypto++ dep to 8.8.0
 - Change C++ dependency to C++14
 - Using `std::array` instead of raw array
 - C bindings (special shout out to [`spotzai`](https://github.com/spotzai) for PR)

@@ -21,6 +21,8 @@ class License
 {
 public:
     License();
+    License(const License&);
+    License& operator=(License);
 
     inline void setLicensee(const std::string& licensee)
     {

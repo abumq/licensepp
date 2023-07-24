@@ -15,13 +15,17 @@ jobs:
     - name: Install GTest
       run: |
         sudo apt-get install libgtest-dev
-        cd /usr/src/gtest
-        cmake .
-        make
-        ls -l
-        #cp *.a /usr/lib
-        sudo ln -s /usr/lib/libgtest.a /usr/local/lib/libgtest.a
-        sudo ln -s /usr/lib/libgtest_main.a /usr/local/lib/libgtest_main.a
+        cd /usr/src/googletest/googletest
+        sudo mkdir build
+        cd build
+        sudo cmake ..
+        sudo make
+        sudo cp libgtest* /usr/lib/
+        cd ..
+        sudo rm -rf build
+        sudo mkdir /usr/local/lib/googletest
+        sudo ln -s /usr/lib/libgtest.a /usr/local/lib/googletest/libgtest.a
+        sudo ln -s /usr/lib/libgtest_main.a /usr/local/lib/googletest/libgtest_main.a
     - name: Install Crypto++
       run: |
         wget https://raw.githubusercontent.com/abumq/abumq.github.io/master/downloads/cryptocpp.tar.gz

@@ -22,7 +22,7 @@ jobs:
         sudo make
         ls -lh lib
         sudo cp lib/libgtest* /usr/local/lib/
-        sudo make install
+        #sudo make install
         #cd ..
         #sudo rm -rf build
         #sudo mkdir /usr/local/lib/googletest
@@ -30,10 +30,10 @@ jobs:
         #sudo ln -s /usr/lib/libgtest_main.a /usr/local/lib/googletest/libgtest_main.a
     - name: Install Crypto++
       run: |
-        wget https://raw.githubusercontent.com/abumq/abumq.github.io/master/downloads/cryptocpp.tar.gz
+        wget https://abumq.github.io/downloads/cryptocpp.tar.gz
         tar xf cryptocpp.tar.gz
         cd cryptopp-CRYPTOPP_5_6_5
-        wget https://raw.githubusercontent.com/abumq/abumq.github.io/master/downloads/pem_pack.zip
+        wget https://abumq.github.io/downloads/pem_pack.zip
         unzip pem_pack.zip
         cmake .
         make

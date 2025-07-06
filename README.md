@@ -36,7 +36,7 @@ I created a concept of digital software licence and implemented it under this pr
 ### Dependencies
 
   * C++11 (C++14 if you are also building tests, since latest Google C++ Testing Library requires C++14)
-  * [Crypto++](https://www.cryptopp.com/) v5.6.5+ [with Pem Pack](https://abumq.github.io/downloads/pem_pack.zip)
+  * [Crypto++](https://www.cryptopp.com/) v5.6.5+ [with Pem Pack](https://github.com/abumq/abumq.github.io/raw/refs/heads/main/downloads/pem_pack.zip)
   * [cmake](https://cmake.org/) v2.8.12+
   * [Ripe](https://github.com/abumq/ripe)
 
@@ -47,10 +47,10 @@ I created a concept of digital software licence and implemented it under this pr
     ```
  * Install Crypto++
      ```
-      wget https://raw.githubusercontent.com/abumq/abumq.github.io/master/downloads/cryptocpp.tar.gz
+      wget https://github.com/abumq/abumq.github.io/raw/refs/heads/main/downloads/cryptocpp.tar.gz
       tar xf cryptocpp.tar.gz
       cd cryptopp-CRYPTOPP_5_6_5
-      wget https://raw.githubusercontent.com/abumq/abumq.github.io/master/downloads/pem_pack.zip
+      wget https://github.com/abumq/abumq.github.io/raw/refs/heads/main/downloads/pem_pack.zip
       unzip pem_pack.zip
       cmake .
       make
